@@ -1,17 +1,17 @@
 //
-//  Request.h
+//  Networking.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 25/10/15.
+//  Created by Stef Van Gils on 5/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "DefaultTracking.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Request : NSManagedObject
+@interface Networking : DefaultTracking
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Request+CoreDataProperties.h"
+#import "Networking+CoreDataProperties.h"

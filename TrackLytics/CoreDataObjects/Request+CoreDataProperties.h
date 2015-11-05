@@ -2,7 +2,7 @@
 //  Request+CoreDataProperties.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 25/10/15.
+//  Created by Stef Van Gils on 5/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,10 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Request (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *event;
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSString *data;
 @property (nullable, nonatomic, retain) NSDate *date;
+@property (nullable, nonatomic, retain) NSString *name;
 
 @end
 

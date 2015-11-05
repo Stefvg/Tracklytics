@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Request+CoreDataProperties.h"
+#import "Timer.h"
 @interface TrackLytics : NSObject
 
 @property (nonatomic, strong) NSString *appCode;
@@ -26,6 +27,8 @@
 -(void) logScreenVisit:(NSString *)name;
 -(void) logButtonClick:(NSString *) name;
 -(void) logSwitchClick:(NSString *)name switchIsOn:(BOOL) isOn;
--(void) trackEvent:(NSString *)name;
--(void) trackNetworkEvent:(NSString *)name;
+-(Timer *) trackEvent:(NSString *)name;
+-(Timer *) trackNetworkEvent:(NSString *)name;
+
+-(void) addRequest:(Request *) request;
 @end
