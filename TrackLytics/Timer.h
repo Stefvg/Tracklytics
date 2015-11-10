@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "StorageManager.h"
-#import "DefaultTracking+CoreDataProperties.h"
-
+#import "Tracking+CoreDataProperties.h"
 @interface Timer : NSObject
 
--(void) initTimer:(DefaultTracking *) trackingObject;
+-(id) initTimer:(Tracking *) trackingObject;
 -(void) stop;
 
 @end

@@ -2,7 +2,7 @@
 //  Tracking+CoreDataProperties.m
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 7/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,5 +13,6 @@
 
 @implementation Tracking (CoreDataProperties)
 
+@dynamic durationTime;
 
 @end

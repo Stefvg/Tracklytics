@@ -10,14 +10,17 @@
 #import "TrackLytics.h"
 @implementation Timer {
     NSDate *startDate;
-    DefaultTracking *trackingObject;
+    Tracking *trackingObject;
 }
 
--(void) initTimer:(DefaultTracking *)object {
+-(id) initTimer:(Tracking *)object {
+    self = [super init];
+    
     startDate = [NSDate date];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         trackingObject = object;
     });
+    return self;
 }
 
 -(void) stop {

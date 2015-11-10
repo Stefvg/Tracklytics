@@ -89,24 +89,25 @@
 
 -(Timer *) trackEvent:(NSString *)name {
     Tracking *request = (Tracking *)[self getNewRequest:@"Tracking"];
-    request.name = name;
-    request.date = [NSDate date];
-    [self save];
-    
-    Timer *timer = [Timer new];
-    [timer initTimer:request];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        request.name = name;
+        request.date = [NSDate date];
+        [self save];
+    });
+    Timer *timer = [[Timer alloc] initTimer:request];
     return timer;
 }
 
 -(Timer *) trackNetworkEvent:(NSString *)name {
     Networking *request = (Networking *)[self getNewRequest:@"Networking"];
-    request.name = name;
-    request.date = [NSDate date];
-    request.connectionType = [self getConnectionType];
-    [self save];
-    
-    Timer *timer = [Timer new];
-    [timer initTimer:request];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        request.name = name;
+        request.date = [NSDate date];
+        request.connectionType = [self getConnectionType];
+        
+        [self save];
+    });
+    Timer *timer = [[Timer alloc] initTimer:request];
     return timer;
 }
 
@@ -119,13 +120,11 @@
 -(void) sendRequests {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         HTTPPost *httpPost = [HTTPPost new];
-        NSLog(@"Sending %ld tracks which are not yet synced to the server", requests.count);
+        NSLog(@"Sending %ld tracks which are not yet synced to the server", (unsigned long)requests.count);
         for (Request *request in requests) {
             NSString *url = [request getURL];
             NSDictionary *dict = [request getData];
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                // [self trackNetworkEvent:@"testnetworking"];
-                
                 NSData *data = [httpPost postSynchronous:url data:dict];
                 NSString *message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
                 while(![message  isEqual: @"SUCCESS"]) {
@@ -133,7 +132,6 @@
                     message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
                 }
                 [self deleteRequest:request];
-                //[self trackNetworkEvent:@"testnetworking"];
             });
             
         }
@@ -153,16 +151,10 @@
         CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
         NSString *currentRadio = telephonyInfo.currentRadioAccessTechnology;
         if ([currentRadio isEqualToString:CTRadioAccessTechnologyLTE]) {
-            // LTE
-            NSLog(@"4G");
             connectionType = @"4G";
         } else if([currentRadio isEqualToString:CTRadioAccessTechnologyEdge] || [currentRadio isEqualToString:CTRadioAccessTechnologyGPRS]) {
-            // EDGE
-            NSLog(@"edge");
             connectionType = @"Edge";
         } else if([currentRadio isEqualToString:CTRadioAccessTechnologyWCDMA] || [currentRadio isEqualToString:CTRadioAccessTechnologyHSDPA] || [currentRadio isEqualToString:CTRadioAccessTechnologyHSUPA]){
-            // 3G
-            NSLog(@"3G");
             connectionType = @"3G";
         }
     }
@@ -208,10 +200,8 @@
 -(void) save {
     @try {
         [[[StorageManager sharedInstance] getContext] save:nil];
-        
     }
     @catch (NSException *exception) {
-        
     }
 }
 

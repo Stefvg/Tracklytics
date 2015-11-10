@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
     <entity name="Button" representedClassName="Button" parentEntity="Request" syncable="YES"/>
-    <entity name="DefaultTracking" representedClassName="DefaultTracking" isAbstract="YES" parentEntity="Request" syncable="YES">
-        <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="Networking" representedClassName="Networking" parentEntity="DefaultTracking" syncable="YES">
+    <entity name="Networking" representedClassName="Networking" parentEntity="Tracking" syncable="YES">
         <attribute name="connectionType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Request" representedClassName="Request" isAbstract="YES" syncable="YES">
@@ -15,14 +12,15 @@
     <entity name="Switch" representedClassName="Switch" parentEntity="Request" syncable="YES">
         <attribute name="isOn" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
-    <entity name="Tracking" representedClassName="Tracking" parentEntity="DefaultTracking" syncable="YES"/>
+    <entity name="Tracking" representedClassName="Tracking" parentEntity="Request" syncable="YES">
+        <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Request" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Switch" positionX="-54" positionY="9" width="128" height="60"/>
-        <element name="Networking" positionX="-36" positionY="18" width="128" height="60"/>
-        <element name="Tracking" positionX="-18" positionY="27" width="128" height="45"/>
-        <element name="Screen" positionX="0" positionY="45" width="128" height="45"/>
-        <element name="DefaultTracking" positionX="18" positionY="63" width="128" height="60"/>
-        <element name="Button" positionX="36" positionY="81" width="128" height="45"/>
+        <element name="Button" positionX="295" positionY="-117" width="128" height="43"/>
+        <element name="Networking" positionX="-119" positionY="36" width="128" height="60"/>
+        <element name="Request" positionX="-11" positionY="-297" width="128" height="75"/>
+        <element name="Screen" positionX="106" positionY="-108" width="128" height="45"/>
+        <element name="Switch" positionX="-254" positionY="-144" width="128" height="60"/>
+        <element name="Tracking" positionX="-63" positionY="-117" width="128" height="60"/>
     </elements>
 </model>
