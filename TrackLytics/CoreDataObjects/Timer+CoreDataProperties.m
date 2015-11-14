@@ -1,21 +1,18 @@
 //
-//  Button+CoreDataProperties.h
+//  Timer+CoreDataProperties.m
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Button.h"
+#import "Timer+CoreDataProperties.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation Timer (CoreDataProperties)
 
-@interface Button (CoreDataProperties)
-
+@dynamic durationTime;
 
 @end
-
-NS_ASSUME_NONNULL_END

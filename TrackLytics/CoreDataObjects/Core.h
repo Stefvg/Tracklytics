@@ -1,8 +1,8 @@
 //
-//  Request.h
+//  Core.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
@@ -11,10 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Request : NSManagedObject
+@interface Core : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
-
 -(NSDictionary *) getData;
 -(NSString *) getDevice;
 -(NSString *) getDate;
@@ -23,4 +22,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Request+CoreDataProperties.h"
+#import "Core+CoreDataProperties.h"

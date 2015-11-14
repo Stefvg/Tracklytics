@@ -1,17 +1,17 @@
 //
-//  Screen.h
+//  Counter.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Request.h"
+#import "Core+CoreDataProperties.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Screen : Request
+@interface Counter : Core
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Screen+CoreDataProperties.h"
+#import "Counter+CoreDataProperties.h"

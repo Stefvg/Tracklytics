@@ -1,16 +1,22 @@
 //
-//  Request.m
+//  Core.m
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
-#import "Request.h"
+#import "Core.h"
 #import "UIDeviceHardware.h"
-@implementation Request
+@implementation Core
 
 // Insert code here to add functionality to your managed object subclass
+
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+    self.date = [NSDate date];
+}
 
 -(NSDictionary *) getData {
     return [NSDictionary new];

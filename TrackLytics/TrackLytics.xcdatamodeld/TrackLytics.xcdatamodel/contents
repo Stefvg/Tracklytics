@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
-    <entity name="Button" representedClassName="Button" parentEntity="Request" syncable="YES"/>
-    <entity name="Networking" representedClassName="Networking" parentEntity="Tracking" syncable="YES">
-        <attribute name="connectionType" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Request" representedClassName="Request" isAbstract="YES" syncable="YES">
+    <entity name="Core" representedClassName="Core" isAbstract="YES" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shouldBeSynced" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Screen" representedClassName="Screen" parentEntity="Request" syncable="YES"/>
-    <entity name="Switch" representedClassName="Switch" parentEntity="Request" syncable="YES">
-        <attribute name="isOn" optional="YES" attributeType="Boolean" syncable="YES"/>
+    <entity name="Counter" representedClassName="Counter" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Tracking" representedClassName="Tracking" parentEntity="Request" syncable="YES">
+    <entity name="Gauge" representedClassName="Gauge" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Histogram" representedClassName="Histogram" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Timer" representedClassName="Timer" parentEntity="Core" syncable="YES">
         <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Button" positionX="295" positionY="-117" width="128" height="43"/>
-        <element name="Networking" positionX="-119" positionY="36" width="128" height="60"/>
-        <element name="Request" positionX="-11" positionY="-297" width="128" height="75"/>
-        <element name="Screen" positionX="106" positionY="-108" width="128" height="45"/>
-        <element name="Switch" positionX="-254" positionY="-144" width="128" height="60"/>
-        <element name="Tracking" positionX="-63" positionY="-117" width="128" height="60"/>
+        <element name="Core" positionX="34" positionY="-315" width="128" height="103"/>
+        <element name="Counter" positionX="-209" positionY="-153" width="128" height="58"/>
+        <element name="Gauge" positionX="36" positionY="-153" width="128" height="58"/>
+        <element name="Timer" positionX="234" positionY="-153" width="128" height="58"/>
+        <element name="Histogram" positionX="45" positionY="-189" width="128" height="60"/>
     </elements>
 </model>

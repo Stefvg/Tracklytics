@@ -1,17 +1,17 @@
 //
-//  Networking.h
+//  Histogram.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 7/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Tracking.h"
+#import "Core.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Networking : Tracking
+@interface Histogram : Core
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Networking+CoreDataProperties.h"
+#import "Histogram+CoreDataProperties.h"

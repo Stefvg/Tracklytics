@@ -1,20 +1,21 @@
 //
-//  Screen+CoreDataProperties.h
+//  Counter+CoreDataProperties.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 5/11/15.
+//  Created by Stef Van Gils on 14/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Screen.h"
+#import "Counter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Screen (CoreDataProperties)
+@interface Counter (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *value;
 
 @end
 

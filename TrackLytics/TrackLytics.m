@@ -13,127 +13,55 @@
 #import "VersionTracker.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "Reachability.h"
-#import "Switch+CoreDataProperties.h"
-#import "Tracking+CoreDataProperties.h"
-#import "Networking+CoreDataProperties.h"
-
-@implementation TrackLytics {
-    NSMutableArray *requests;
-}
-
-+ (id)sharedInstance
-{
-    // structure used to test whether the block has completed or not
-    static dispatch_once_t p = 0;
-    
-    // initialize sharedObject as nil (first call only)
-    __strong static id _sharedObject = nil;
-    
-    // executes a block object once and only once for the lifetime of an application
-    dispatch_once(&p, ^{
-        _sharedObject = [[self alloc] init];
-    });
-    
-    // returns the same object each time
-    return _sharedObject;
-}
 
 
--(void) startTrackerWithAppCode:(NSString *)appCode {
+@implementation TrackLytics
+
+static NSMutableArray *array;
+static NSString *appCode;
+static NSString *device;
+
++(void) startTrackerWithAppCode:(NSString *)code {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        self.appCode = appCode;
+        appCode = appCode;
         UIDeviceHardware *h=[[UIDeviceHardware alloc] init];
-        self.device = [h platform];
-        [[VersionTracker new] getVersion:self.device];
+        device = [h platform];
+        [[VersionTracker new] getVersion:device];
         
-        requests = [NSMutableArray new];
-        NSArray *previousRequests = [self getPreviousRequests];
-        [requests addObjectsFromArray:previousRequests];
+        array = [NSMutableArray new];
+        [array addObjectsFromArray:[self getPreviousRequests]];
         [self sendRequests];
         [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
     });
 }
 
-
-
--(void) logScreenVisit:(NSString *)name {
++(void) addRequest:(Core *) request {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        Request *request = [self getNewRequest:@"Screen"];
-        request.name = name;
-        request.date = [NSDate date];
-        [self save];
-        [requests addObject:request];
-    });
-}
-
--(void) logButtonClick:(NSString *)name {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        Request *request = [self getNewRequest:@"Button"];
-        request.name = name;
-        request.date = [NSDate date];
-        [self save];
-        [requests addObject:request];
-    });
-}
-
--(void) logSwitchClick:(NSString *)name switchIsOn:(BOOL) isOn {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        Switch *request = (Switch *)[self getNewRequest:@"Switch"];
-        request.name = name;
-        request.date = [NSDate date];
-        request.isOn = [NSNumber numberWithBool:isOn];
-        [self save];
-        [requests addObject:request];
-    });
-}
-
--(Timer *) trackEvent:(NSString *)name {
-    Tracking *request = (Tracking *)[self getNewRequest:@"Tracking"];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        request.name = name;
-        request.date = [NSDate date];
+        [array addObject:request];
         [self save];
     });
-    Timer *timer = [[Timer alloc] initTimer:request];
-    return timer;
 }
 
--(Timer *) trackNetworkEvent:(NSString *)name {
-    Networking *request = (Networking *)[self getNewRequest:@"Networking"];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        request.name = name;
-        request.date = [NSDate date];
-        request.connectionType = [self getConnectionType];
-        
-        [self save];
-    });
-    Timer *timer = [[Timer alloc] initTimer:request];
-    return timer;
-}
-
--(void) addRequest:(Request *) request {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [requests addObject:request];
-    });
-}
-
--(void) sendRequests {
++(void) sendRequests {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         HTTPPost *httpPost = [HTTPPost new];
-        NSLog(@"Sending %ld tracks which are not yet synced to the server", (unsigned long)requests.count);
-        for (Request *request in requests) {
+        NSLog(@"Sending %ld tracks which are not yet synced to the server", (unsigned long)array.count);
+        for (Core *request in array) {
             NSString *url = [request getURL];
-            NSDictionary *dict = [request getData];
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                NSData *data = [httpPost postSynchronous:url data:dict];
-                NSString *message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                while(![message  isEqual: @"SUCCESS"]) {
-                    data = [httpPost postSynchronous:url data:dict];
-                    message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                }
-                [self deleteRequest:request];
-            });
-            
+            @try {
+                NSDictionary *dict = [request getData];
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                    NSData *data = [httpPost postSynchronous:url data:dict];
+                    NSString *message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                    while(![message  isEqual: @"SUCCESS"]) {
+                        data = [httpPost postSynchronous:url data:dict];
+                        message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                    }
+                    [self deleteRequest:request];
+                });
+            }
+            @catch (NSException *exception) {
+            }
         }
     });
     
@@ -162,28 +90,104 @@
 }
 
 
--(Request *) getNewRequest:(NSString *) requestType {
-    NSManagedObjectContext *context =
-    [[StorageManager sharedInstance] getContext];
-    Request *request;
-    request = [NSEntityDescription
-               insertNewObjectForEntityForName:requestType
-               inManagedObjectContext:context];
-    
-    return request;
++(void) createNewCounterWithType:(NSString *)type withName:(NSString *)name {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Counter *counter;
+        counter = [NSEntityDescription
+                   insertNewObjectForEntityForName:@"Counter"
+                   inManagedObjectContext:context];
+        counter.name = name;
+        counter.type = type;
+        [self save];
+        [array addObject:counter];
+    });
 }
 
--(NSArray *) getPreviousRequests {
++(void) createNewCounterWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger)value{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Counter *counter;
+        counter = [NSEntityDescription
+                   insertNewObjectForEntityForName:@"Counter"
+                   inManagedObjectContext:context];
+        counter.name = name;
+        counter.type = type;
+        counter.value = [NSNumber numberWithInteger:value];
+        [self save];
+        [array addObject:counter];
+    });
+}
+
++(Timer *) createNewTimerWithType:(NSString *)type withName:(NSString *)name {
+    NSManagedObjectContext *context =
+    [[StorageManager sharedInstance] getContext];
+    Timer *timer;
+    timer = [NSEntityDescription
+             insertNewObjectForEntityForName:@"Timer"
+             inManagedObjectContext:context];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        timer.name = name;
+        timer.type = type;
+        [self save];
+    });
+    return timer;
+}
+
++(void) createNewGaugeWithType:(NSString *)type withName:(NSString *)name withValue:(NSNumber *) value {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Gauge *gauge;
+        gauge = [NSEntityDescription
+                   insertNewObjectForEntityForName:@"Gauge"
+                   inManagedObjectContext:context];
+        gauge.name = name;
+        gauge.type = type;
+        gauge.value = value;
+        [self save];
+        [array addObject:gauge];
+    });
+}
+
++(void) createNewHistogramWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger)value{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Histogram *histogram;
+        histogram = [NSEntityDescription
+                   insertNewObjectForEntityForName:@"Histogram"
+                   inManagedObjectContext:context];
+        histogram.name = name;
+        histogram.type = type;
+        histogram.value = [NSNumber numberWithInteger:value];
+        [self save];
+        [array addObject:histogram];
+    });
+}
+
++(NSArray *) getPreviousRequests {
     @try {
         NSManagedObjectContext *context =
         [[StorageManager sharedInstance]  getContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription
-                                       entityForName:@"Request" inManagedObjectContext:context];
+                                       entityForName:@"Core" inManagedObjectContext:context];
         [fetchRequest setEntity:entity];
         
         NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:nil];
-        return  fetchedObjects;
+        NSMutableArray *array = [NSMutableArray new];
+        for (Core *request in fetchedObjects) {
+            if(![request.shouldBeSynced boolValue]){
+                [self deleteRequest:request];
+            }else{
+                [array addObject:request];
+            }
+        }
+        
+        return array;
     }
     @catch (NSException *exception) {
         
@@ -192,9 +196,17 @@
     
 }
 
--(void) deleteRequest:(Request *) request {
++(void) deleteRequest:(Core *) request {
     [[[StorageManager sharedInstance]  getContext] deleteObject:request];
     [self save];
+}
+
++(void) save {
+    @try {
+        [[[StorageManager sharedInstance] getContext] save:nil];
+    }
+    @catch (NSException *exception) {
+    }
 }
 
 -(void) save {
