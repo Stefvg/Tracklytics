@@ -24,7 +24,7 @@ static BOOL firstRun;
 static NSString *uuid;
 +(void) startTrackerWithAppCode:(NSInteger)code {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        appCode = appCode;
+        appCode = code;
         uuid = [[NSUUID UUID] UUIDString];
         UIDeviceHardware *h=[[UIDeviceHardware alloc] init];
         device = [h platform];
