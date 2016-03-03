@@ -17,5 +17,6 @@
 @dynamic type;
 @dynamic name;
 @dynamic shouldBeSynced;
-
+@dynamic databaseID;
+@dynamic connectionType;
 @end

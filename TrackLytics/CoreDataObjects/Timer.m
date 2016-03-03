@@ -38,7 +38,9 @@
 }
 
 -(NSDictionary *) getData {
-    return [NSDictionary dictionaryWithObjects:@[self.type, self.name, self.durationTime, [super getDate], [super getDevice]] forKeys:@[@"type",@"name", @"durationTime", @"date", @"device"]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[super getMetadata]];
+    [dictionary setObject:self.durationTime forKey:@"durationTime"];
+    return dictionary;
 }
 
 @end

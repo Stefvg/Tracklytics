@@ -8,7 +8,9 @@
 
 #import "StorageManager.h"
 
-@implementation StorageManager
+@implementation StorageManager {
+    NSInteger isRunning;
+}
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -30,6 +32,22 @@
     // returns the same object each time
     return _sharedObject;
 }
+
+-(void) save {
+    isRunning++;
+    if(isRunning == 1){
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            [[self getContext] save:nil];
+            if(isRunning > 1){
+                isRunning = 0;
+                [self save];
+            }
+            isRunning = 0;
+        });
+    }
+    
+}
+
 
 -(NSManagedObjectContext *) getContext {
     if (_managedObjectContext != nil) {

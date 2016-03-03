@@ -1,19 +1,18 @@
 //
-//  Histogram.m
+//  Meter.m
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 14/11/15.
+//  Created by Stef Van Gils on 28/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
-#import "Histogram.h"
+#import "Meter.h"
 
-@implementation Histogram
+@implementation Meter
 
 // Insert code here to add functionality to your managed object subclass
-
 -(NSString *) getURL {
-    return @"https://svg-apache.iminds-security.be/backend/Histogram.php";
+    return @"https://svg-apache.iminds-security.be/backend/Meter.php";
 }
 
 -(NSDictionary *) getData {

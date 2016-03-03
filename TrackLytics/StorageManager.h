@@ -16,4 +16,7 @@
 
 + (id)sharedInstance;
 -(NSManagedObjectContext *) getContext;
+
+-(void) save;
+
 @end

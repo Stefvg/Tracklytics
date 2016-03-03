@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *type;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *shouldBeSynced;
-
+@property (nullable, nonatomic, retain) NSString *databaseID;
+@property (nullable, nonatomic, retain) NSString *connectionType;
 @end
 
 NS_ASSUME_NONNULL_END

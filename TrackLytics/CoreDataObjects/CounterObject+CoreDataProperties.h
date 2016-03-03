@@ -1,19 +1,19 @@
 //
-//  Counter+CoreDataProperties.h
+//  CounterObject+CoreDataProperties.h
 //  SportsTimer
 //
-//  Created by Stef Van Gils on 14/11/15.
+//  Created by Stef Van Gils on 5/12/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Counter.h"
+#import "CounterObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Counter (CoreDataProperties)
+@interface CounterObject (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSNumber *value;
 
