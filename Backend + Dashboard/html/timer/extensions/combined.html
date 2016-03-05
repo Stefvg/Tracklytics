@@ -1,0 +1,23 @@
+<div ng-repeat="version in combined.versions">
+    <h3>{{version}} </h3>
+    <div ng-repeat="device in combined.devices[$index]">
+        <h4>{{device}}</h4>
+        <div ng-repeat="connectionType in combined.connectionTypes[$parent.$index][$index]">
+            <h5>{{connectionType}}</h5>
+            <table>
+                <thead>
+                <tr>
+                    <th>Naam</td>
+                    <th>Gemiddelde verstreken tijd</td>
+                </tr>
+                </thead>
+                <tr style="width: 100%" ng-repeat="value in combined.objects[$parent.$parent.$index][$parent.$index][$index]">
+                    <td style="width: 50%">{{value.name}}</td>
+                    <td style="width: 50%">{{value.durationTime}} Seconden</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+

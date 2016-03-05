@@ -1,0 +1,9 @@
+<div ng-repeat="type in chart.types">
+    <h3><a href="/html/counter/counter.html?app={{chart.app}}&type={{type}}">{{type}}</a> </h3>
+
+
+
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="data[$index]" chart-labels="labels[$index]">
+    </canvas>
+</div>

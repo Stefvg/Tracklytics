@@ -1,0 +1,19 @@
+<div ng-repeat="version in verCon.versions">
+    <h3>{{version}} </h3>
+    <div ng-repeat="connectionType in verCon.connectionTypes[$index]">
+        <h4>{{connectionType}}</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>Naam</td>
+                <th>Gemiddelde verstreken tijd</td>
+            </tr>
+            </thead>
+            <tr style="width: 100%" ng-repeat="value in verCon.objects[$parent.$index][$index]">
+                <td style="width: 50%">{{value.name}}</td>
+                <td style="width: 50%">{{value.durationTime}} Seconden</td>
+            </tr>
+        </table>
+    </div>
+</div>
+

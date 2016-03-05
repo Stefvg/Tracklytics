@@ -1,0 +1,16 @@
+<div ng-repeat="versions in version.versions">
+    <h3>{{versions}} </h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</td>
+            <th>Gemiddelde verstreken tijd</td>
+        </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="value in version.objects[$index]">
+            <td style="width: 50%">{{value.name}}</td>
+            <td style="width: 50%">{{value.durationTime}} Seconden</td>
+        </tr>
+    </table>
+</div>
+

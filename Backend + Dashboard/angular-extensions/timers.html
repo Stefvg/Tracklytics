@@ -1,0 +1,18 @@
+<div ng-repeat="timerObject in timer.timers">
+    <h3><a href="/html/timer/timer.html?app={{timer.app}}&type={{timerObject}}">{{timerObject}}</a> </h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</td>
+                <th>Toestel</td>
+                <th>Gemiddelde verstreken tijd</td>
+            </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="value in timer.objects[$index]">
+            <td style="width: 33%">{{value.name}}</td>
+            <td style="width: 33%">{{value.device}}</td>
+            <td style="width: 33%">{{value.durationTime}} Seconden</td>
+        </tr>
+    </table>
+</div>
+

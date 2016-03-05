@@ -1,0 +1,31 @@
+<div>
+    <h3>Combined</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</td>
+            <th>Mediaan</td>
+        </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="object in median.combinedValues">
+            <td style="width: 50%">{{object.name}}</td>
+            <td style="width: 50%">{{object.median}}</td>
+        </tr>
+    </table>
+</div>
+
+<div ng-repeat="version in median.versions">
+    <h3>{{version}}</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</td>
+            <th>Mediaan</td>
+        </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="value in median.objects[$index]">
+            <td style="width: 50%">{{value.name}}</td>
+            <td style="width: 50%">{{value.median}}</td>
+        </tr>
+    </table>
+</div>

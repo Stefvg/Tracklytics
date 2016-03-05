@@ -1,0 +1,53 @@
+<!-- Tabs Go Here -->
+
+
+<header id="header" style="height: 80px">
+    <div id="stuck_container">
+        <div class="container">
+            <div class="row">
+                <div class="grid_12">
+                    <h1><a href="../../index.html">Home</a></h1>
+                    <nav>
+                        <ul class="sf-menu" style="margin-right: 80px">
+                            <li ng-class="{ current:tab.isSet(1) }">
+                                <a href ng-click="tab.setTab(1)">Connection</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(2) }">
+                                <a href ng-click="tab.setTab(2)">Device</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(3) }">
+                                <a href ng-click="tab.setTab(3)">Version</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(4) }">
+                                <a href ng-click="tab.setTab(4)">Dev-Con</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(5) }">
+                                <a href ng-click="tab.setTab(5)">Ver-Dev</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(6) }">
+                                <a href ng-click="tab.setTab(6)">Ver-Con</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(7) }">
+                                <a href ng-click="tab.setTab(7)">Ver-Dev-Con</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="content">
+
+
+    <!--  Description Tab's Content  -->
+    <connection ng-show="tab.isSet(1)" ng-controller="ConnectionController as connection"></connection>
+    <device ng-show="tab.isSet(2)" ng-controller="DeviceController as device"></device>
+    <version ng-show="tab.isSet(3)" ng-controller="VersionController as version"></version>
+    <devcon ng-show="tab.isSet(4)" ng-controller="DevConController as devCon"></devcon>
+    <verdev ng-show="tab.isSet(5)" ng-controller="VerDevController as verDev"></verdev>
+    <vercon ng-show="tab.isSet(6)" ng-controller="VerConController as verCon"></vercon>
+    <combined ng-show="tab.isSet(7)" ng-controller="CombinedController as combined"></combined>
+
+
+</section>

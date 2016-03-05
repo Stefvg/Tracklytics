@@ -1,0 +1,13 @@
+<div ng-repeat="type in hist.types">
+    <h3><a href="/html/histogram/histogram.html?app={{hist.app}}&type={{type}}">{{type}}</a> </h3>
+    <div>
+    <rzslider
+            rz-slider-model="slider[$index].min"
+            rz-slider-high="slider[$index].max"
+            rz-slider-options="slider[$index].options"></rzslider>
+
+    </div>
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="data[$index]" chart-labels="labels[$index]">
+    </canvas>
+</div>

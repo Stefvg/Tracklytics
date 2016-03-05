@@ -1,0 +1,53 @@
+<!-- Tabs Go Here -->
+
+
+<header id="header" style="height: 80px">
+    <div id="stuck_container">
+        <div class="container">
+            <div class="row">
+                <div class="grid_12">
+
+                    <h1><a href="../../index.html">Home</a></h1>
+                    <nav>
+                        <ul class="sf-menu" style="margin-right: 80px">
+                            <li ng-class="{ current:tab.isSet(1) }">
+                                <a href ng-click="tab.setTab(1); app.refreshSlider()">Devices</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(2) }">
+                                <a href ng-click="tab.setTab(2); app.refreshSlider()">Version</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(3) }">
+                                <a href ng-click="tab.setTab(3); app.refreshSlider()">Ver-Dev</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(4) }">
+                            <a href ng-click="tab.setTab(4); app.refreshSlider()">Dev-Ver</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(5) }">
+                                <a href ng-click="tab.setTab(5); app.refreshSlider()">Data</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="content">
+
+
+    <!--  Description Tab's Content  -->
+    <devices ng-show="tab.isSet(1)" ng-controller="DeviceController as devices"></devices>
+    <versions ng-show="tab.isSet(2)" ng-controller="VersionController as version"></versions>
+    <combined ng-show="tab.isSet(3)" ng-controller="CombinedController as combined"></combined>
+    <combined-reverse ng-show="tab.isSet(4)" ng-controller="CombinedReverseController as combinedReverse"></combined-reverse>
+    <data ng-show="tab.isSet(5)" ng-controller="DataController as data"></data>
+    <!--
+
+
+        <gauges ng-show="tab.isSet(3)" ng-controller="GaugeController as gauge"></gauges>
+        <histogram ng-show="tab.isSet(4)" ng-controller="HistogramController as hist"></histogram>
+        <!--  Review Tab's Content  -->
+    <!--<meters ng-show="tab.isSet(4)"></meters>
+-->
+
+</section>

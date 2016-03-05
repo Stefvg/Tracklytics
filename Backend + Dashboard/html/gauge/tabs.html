@@ -1,0 +1,48 @@
+<!-- Tabs Go Here -->
+
+
+<header id="header" style="height: 80px">
+    <div id="stuck_container">
+        <div class="container">
+            <div class="row">
+                <div class="grid_12">
+                    <h1><a href="../../index.html">Home</a></h1>
+                    <nav>
+                        <ul class="sf-menu" style="margin-right: 80px">
+                            <li ng-class="{ current:tab.isSet(1) }">
+                                <a href ng-click="tab.setTab(1)">Mean</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(2) }">
+                                <a href ng-click="tab.setTab(2)">Median</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(3) }">
+                                <a href ng-click="tab.setTab(3)">Highest Value</a>
+                            </li>
+                            <li ng-class="{ current:tab.isSet(4) }">
+                                <a href ng-click="tab.setTab(4)">Lowest Value</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="content">
+
+
+    <!--  Description Tab's Content  -->
+    <mean ng-show="tab.isSet(1)" ng-controller="MeanController as mean"></mean>
+    <median ng-show="tab.isSet(2)" ng-controller="MedianController as median"></median>
+    <highest ng-show="tab.isSet(3)" ng-controller="HighestController as highest"></highest>
+    <lowest ng-show="tab.isSet(4)" ng-controller="LowestController as lowest"></lowest>
+    <!--
+
+
+        <gauges ng-show="tab.isSet(3)" ng-controller="GaugeController as gauge"></gauges>
+        <histogram ng-show="tab.isSet(4)" ng-controller="HistogramController as hist"></histogram>
+        <!--  Review Tab's Content  -->
+    <!--<meters ng-show="tab.isSet(4)"></meters>
+-->
+
+</section>

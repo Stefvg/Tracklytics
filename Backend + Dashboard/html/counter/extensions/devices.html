@@ -1,0 +1,6 @@
+<div ng-repeat="device in devices.devices">
+    <h3>{{device}}</h3>
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="data[$index]" chart-labels="labels[$index]">
+    </canvas>
+</div>

@@ -1,0 +1,9 @@
+<div ng-repeat="device in combinedReverse.devices">
+    <h3>{{device}}</h3>
+    <div ng-repeat="version in combinedReverse.versions[$index]">
+        <h4>{{version}}</h4>
+        <canvas id="bar" class="chart chart-bar"
+                chart-data="data[$parent.$index][$index]" chart-labels="labels[$parent.$index][$index]">
+        </canvas>
+    </div>
+</div>

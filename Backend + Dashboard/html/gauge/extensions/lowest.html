@@ -1,0 +1,31 @@
+<div>
+    <h3>Combined</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</td>
+            <th>Laagste waarde</td>
+        </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="object in lowest.combinedValues">
+            <td style="width: 50%">{{object.name}}</td>
+            <td style="width: 50%">{{object.lowest}}</td>
+        </tr>
+    </table>
+</div>
+
+<div ng-repeat="version in lowest.versions">
+    <h3>{{version}}</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</td>
+            <th>Laagste waarde</td>
+        </tr>
+        </thead>
+        <tr style="width: 100%" ng-repeat="value in lowest.objects[$index]">
+            <td style="width: 50%">{{value.name}}</td>
+            <td style="width: 50%">{{value.lowest}}</td>
+        </tr>
+    </table>
+</div>
