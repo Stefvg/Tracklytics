@@ -20,8 +20,6 @@
 
 
 
-
-
         $scope.slider =[];
 
         $http.get('../php/getHistogramTypes.php?app=' + hist.app).success(function(data){
@@ -83,11 +81,10 @@
 
 
 function updateChart($scope, sliderID, hist, $http) {
-    console.log();
         var min = $scope.slider[sliderID].min;
         var max = $scope.slider[sliderID].max;
 
-        $http.get('../php/getHistogramValues.php?type=' + hist.types[sliderID] +'&number=' + sliderID +'&min='+ min +'&max=' + max).success(function(data){
+        $http.get('../php/getHistogramValues.php?app=' + hist.app + '&type=' + hist.types[sliderID] +'&number=' + sliderID +'&min='+ min +'&max=' + max).success(function(data){
             var object = data[Object.keys(data)];
             var values = object['array'];
             var valueIndex = Object.keys(data)[0];
@@ -99,7 +96,7 @@ function updateChart($scope, sliderID, hist, $http) {
 
                 console.log("i: " + offset);
                 for(var j=0; j<values.length; j++){
-                    $http.get('../php/getHistogramNumberOfValues.php?type=' + hist.types[valueIndex] +'&number=' + valueIndex + '&number2=' +j +'&value=' + values[j] +'&offset=' + offset).success(function(data){
+                    $http.get('../php/getHistogramNumberOfValues.php?app=' + hist.app + '&type=' + hist.types[valueIndex] +'&number=' + valueIndex + '&number2=' +j +'&value=' + values[j] +'&offset=' + offset).success(function(data){
                         var index1 = Object.keys(data)[0];
                         var index2 = data[index1]['number2'];
                         hist.tempValues[index2] = data[index1]['count'];

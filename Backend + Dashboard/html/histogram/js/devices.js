@@ -29,6 +29,14 @@
 
         $scope.labels = [];
         $scope.data = [];
+        var $chart;
+        $scope.$on("create", function (event, chart) {
+            if (typeof $chart !== "undefined") {
+                $chart.destroy();
+            }
+
+            $chart = chart;
+        });
         $scope.slider =[];
         $http.get('./php/devices/getDevices.php?app=' + appName + '&type=' + type).success(function(data){
             hist.devices = data;

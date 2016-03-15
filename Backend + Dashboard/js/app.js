@@ -2,15 +2,14 @@
  * Created by stefvangils on 14/11/15.
  */
 (function(){
-    var app = angular.module('thesis', ['counter', 'timer', 'gauge', 'histogram']);
+    var app = angular.module('thesis', ['counter', 'timer', 'gauge', 'histogram', 'meter']);
 
 
 
     app.controller("MainController", ['$rootScope', function($rootScope) {
         this.refreshSlider = (function (){
-            console.log("test123");
-            $rootScope.$broadcast('refreshSlider', [1,2,3]);
-            $rootScope.$emit('refreshSlider', [1,2,3]);
+            $rootScope.$broadcast('refreshSlider', [1,2,3,4,5]);
+            $rootScope.$emit('refreshSlider', [1,2,3,4,5]);
         });
     }]);
     app.directive("counts", function() {

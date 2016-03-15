@@ -24,6 +24,15 @@
             });
         });
 
+        var $chart;
+        $scope.$on("create", function (event, chart) {
+            if (typeof $chart !== "undefined") {
+                $chart.destroy();
+            }
+
+            $chart = chart;
+        });
+
         var hist = this;
         hist.tempValues = [];
         hist.versions = [];

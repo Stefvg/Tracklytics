@@ -1,0 +1,13 @@
+<div ng-repeat="device in devices.devices">
+    <h3>{{device}}</h3>
+    <div>
+        <rzslider
+                rz-slider-model="slider[$index].min"
+                rz-slider-high="slider[$index].max"
+                rz-slider-options="slider[$index].options"></rzslider>
+
+    </div>
+    <canvas id="line" class="chart chart-line" chart-data="data[$index]"
+            chart-labels="labels[$index]" chart-legend="false">
+    </canvas>
+</div>

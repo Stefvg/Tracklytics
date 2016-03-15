@@ -1,0 +1,13 @@
+<div ng-repeat="version in combined.versions" ng-init="sectionIndex=$index">
+    <h3>{{version}}</h3>
+    <div ng-repeat="device in combined.devices[$index]">
+        <h4>{{device}}</h4>
+        <rzslider
+                rz-slider-model="slider[$parent.$index][$index].min"
+                rz-slider-high="slider[$parent.$index][$index].max"
+                rz-slider-options="slider[$parent.$index][$index].options"></rzslider>
+        <canvas id="line" class="chart chart-line" chart-data="data[$parent.$index][$index]"
+                chart-labels="labels[$parent.$index][$index]" chart-legend="false">
+        </canvas>
+    </div>
+</div>

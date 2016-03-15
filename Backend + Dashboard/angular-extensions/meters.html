@@ -1,0 +1,15 @@
+<div ng-repeat="type in meter.types">
+    <h3><a href="/html/meter/meter.html?app={{meter.app}}&type={{type}}">{{type}}</a> </h3>
+
+    <div>
+        <rzslider
+                rz-slider-model="slider[$index].min"
+                rz-slider-high="slider[$index].max"
+                rz-slider-options="slider[$index].options"></rzslider>
+
+    </div>
+    <canvas id="line" class="chart chart-line" chart-data="data[$index]"
+            chart-labels="labels[$index]" chart-legend="false">
+    </canvas>
+
+</div>
