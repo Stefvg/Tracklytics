@@ -15,9 +15,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Insert code here to declare functionality of your managed object subclass
 
+/**
+ * Increase the value of the counter with 1.
+ */
 -(void) inc;
+/**
+ * Increase the value of the counter with a certain value.
+ * @param   value
+ *          The value the counter has to be increased with.
+ */
 -(void) inc:(NSInteger) value;
+/**
+ * Decrease the value of the counter with 1.
+ */
 -(void) dec;
+/**
+ * Decrease the value of the counter with a certain value.
+ * @param   value
+ *          The value the counter has to be decreased with.
+ */
 -(void) dec:(NSInteger) value;
 
 @end

@@ -10,6 +10,10 @@
 
 @protocol MeterInterface <NSObject>
 
+/**
+ * Use this method to temporarily collect a value.
+ * @return a float value.
+ */
 -(float) getValue;
 
 @end

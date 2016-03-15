@@ -13,12 +13,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Core : NSManagedObject
 
-// Insert code here to declare functionality of your managed object subclass
+/**
+ * This method is purely used in the library. It shouldn't be used by a developer.
+ */
 -(NSDictionary *) getData;
+/**
+ * This method is purely used in the library. It shouldn't be used by a developer.
+ */
 -(NSString *) getDate;
+/**
+ * This method is purely used in the library. It shouldn't be used by a developer.
+ */
 -(NSString *) getURL;
+/**
+ * This method is purely used in the library. It shouldn't be used by a developer.
+ */
 -(NSString *) getDatabaseID;
-
+/**
+ * This method is purely used in the library. It shouldn't be used by a developer.
+ */
 -(NSDictionary *) getMetadata;
 @end
 

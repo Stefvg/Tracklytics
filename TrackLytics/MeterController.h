@@ -13,8 +13,20 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *name;
 
+/**
+ * Add an entry manually to the meter.
+ * @param   value
+ *          A float value indicating a meter observation.
+ */
 -(void) addEntry:(float) value;
 
+/**
+ * Configure a repeatable operation. The value of the meter gets collected periodically.
+ * @param   interface
+ *          An instance of an object implementing the MeterInterface.
+ * @param   interval
+ *          The frequency of the collection of the data. (in seconds)
+ */
 -(void) addRepeatable:(id<MeterInterface>) interface withTimeInterval:(NSTimeInterval) interval;
 
 -(void) stop;

@@ -22,7 +22,7 @@ static NSString *device;
 static NSString *previousConnectionType;
 static BOOL firstRun;
 static NSString *uuid;
-+(void) startTrackerWithAppCode:(NSInteger)code {
++(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         appCode = code;
         uuid = [[NSUUID UUID] UUIDString];
@@ -34,7 +34,7 @@ static NSString *uuid;
         array = [NSMutableArray new];
         [array addObjectsFromArray:[self getPreviousRequests]];
         [self sendRequests];
-        [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
         
     });
 }
@@ -158,7 +158,7 @@ static NSString *uuid;
     return timer;
 }
 
-+(void) createNewGaugeWithType:(NSString *)type withName:(NSString *)name withValue:(NSNumber *) value {
++(void) createNewGaugeWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger) value {
     NSDate *date = [NSDate date];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSManagedObjectContext *context =
@@ -169,7 +169,7 @@ static NSString *uuid;
                  inManagedObjectContext:context];
         gauge.name = name;
         gauge.type = type;
-        gauge.value = value;
+        gauge.value = [NSNumber numberWithInteger:value];
         gauge.date = date;
         [self save];
         [array addObject:gauge];
