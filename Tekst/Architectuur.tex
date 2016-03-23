@@ -135,45 +135,9 @@ In het volgende diagram \ref{fig:flow3} wordt getoond hoe het verzenden van de g
 \end{figure}
 
 
-\begin{figure}[!h]
-  \centering
-  \includegraphics[scale=0.4]{Afbeeldingen/Architectuur/ClassDiagram}
-  \caption{Klassediagram Tracklytics library.}
-  \label{fig:fig}
-\end{figure}
 
-\section{Klassediagram} \label{sec:Klassediagram}
-Het klassediagram duidt de klasses aan waaruit de Tracklytics libray bestaat. De verantwoordelijkheden van de verschillende klasses worden uitgelegd in de volgende secties.
 
-\subsection{TrackLytics}
-De Tracklytics klasse is de klasse die de synchronisatie met de server verzorgt. De klasse is ook verantwoordelijk voor het creëren en opslaan van de meetobjecten. De klasse heeft enkel statische methodes, dit zorgt ervoor dat de library gemakkelijker te gebruiken is omdat er geen object van deze klasse aangemaakt moet worden telkens de library gebruikt zou worden.
 
-\subsection{Core}
-Om de gemeenschappelijke elementen te combineren is ervoor gekozen om die gemeenschappelijke elementen in een abstracte superklasse te steken. De gemeenschappelijke methodes worden ook in de Core klasse gestoken, zodat de subklasses indien nodig dit kunnen overriden. 
-
-\subsection{Counter}
-De counter klasse stelt een telobject voor. Je kan bij een counter een getal optellen en aftrekken. De inc() functie verhoogt de value met 1 terwijl inc(x) de value verhoogt met x. Dit is opgesplitst omdat inc() vaker gebruikt gaat worden en zo moet er niet telkens inc(1) uitgevoerd worden. Hetzelfde geldt voor dec dat de value gaat verlagen. Deze functies zijn een onderdeel van de update call zoals besproken in vorige sectie \ref{sec:TrackingEnMonitoringVanGegevens}.
-
-\subsection{Gauge}
-De gauge klasse stelt een object met een waarde voor. Dit object wordt aangemaakt en opgeslagen met die waarde en gesynchroniseerd naar de server. Er zijn geen methodes beschikbaar speciaal voor dit object, omdat deze waarde niet aangepast zal worden.
-
-\subsection{Histogram}
-De gauge klasse en het histogram zijn maar op 1 punt verschillend en dat is in de back-end. De waarde van het histogram wordt ergens anders opgeslagen dan de waarde van de gauge. In de tracklytics library zijn ze dus hetzelfde, enkel de getUrl() methode geeft een andere url terug.
-
-\subsection{Timer}
-De timer klasse kan gebruikt worden om de duur van een gebeurtenis te meten. Bij het aanmaken van de timer wordt de huidige timestamp bijgehouden. De stop() methode neemt de huidige timestamp en vergelijkt die met degene die werd bijgehouden. Zo weten we de duur van de gebeurtenis. Indien de programmeur de methode stop() nooit aanroept wordt de timer niet gesynchroniseerd naar de server zodat er geen foute data tussen de data in de database staat. De stop() call is een onderdeel van de update call zoals besproken in vorige sectie \ref{sec:TrackingEnMonitoringVanGegevens}.
-
-\subsection{Meter}
-Een meter is bedoeld om een reeks van waarden te kunnen meten. Om dit voor de developer makkelijk te maken hebben we hiervoor 3 componenten uitgedacht: de Meter, de MeterController en de MeterInterface. De meter component is een uitzondering als er gekeken wordt naar het flow diagram uit de vorige sectie \ref{fig:flow2}. In plaats van dat een Meter object wordt terug gegeven, wordt er een MeterController object terug gegeven. Deze keuze is gemaakt, omdat het de structuur van de library versimpeld en het de developer gemakkelijker maakt.
-
-\subsubsection{Meter}
-Het meter object is het object dat opgeslagen wordt en dat gesynchroniseerd wordt naar de server. Het object houdt de value bij en ook het tijdstip van aanmaken.
-
-\subsubsection{MeterController}
-De metercontroller zorgt ervoor dat nieuwe meters aangemaakt kunnen worden. De metercontroller bevat de naam en het type van de meter. We kiezen ervoor om meters via deze weg aan te maken, omdat dit het werk van de programmeur vermindert. De programmeur moet enkel de waarde meegeven aan de metercontroller in plaats van telkens opnieuw de type en de naam mee te geven. We hebben het de programmeur nog op een manier gemakkelijk gemaakt. De metercontroller heeft de mogelijkheid om periodiek data op te halen van een functie die de programmeur specifiëert. Zo moet de programmeur dit niet zelf gaan doen in een bepaalde methode. 
-
-\subsubsection{MeterInterface}
-De meterinterface is de verbinding tussen de periodieke functie van de MeterController en het object waar de data op moet gehaald worden. Er is maar 1 functie, namelijk de getValue() die een waarde gaat ophalen. De programmeur vult deze methode dan in om de correcte waarde terug te geven.
 
 
 
