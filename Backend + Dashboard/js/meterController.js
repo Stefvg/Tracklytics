@@ -18,19 +18,9 @@
         $rootScope.$on('refreshSlider', function (event,data) {
             $timeout(function () {
                 $scope.$broadcast('rzSliderForceRender');
-                console.log("refresh");
+
             });
         });
-
-        /*var $chart;
-        $scope.$on("create", function (event, chart) {
-            console.log(chart);
-            if (typeof $chart !== "undefined") {
-                $chart.destroy();
-            }
-
-            $chart = chart;
-        });*/
 
         $scope.slider = [];
         $http.get('../php/getMeterTypes.php?app=' + charts.app).success(function (data) {
@@ -49,15 +39,10 @@
                     $scope.labels[valueIndex] = values;
                     charts.sliderValues[valueIndex] = labels;
                     var offset = object['offset'];
-                    console.log(values);
                     $scope.slider[valueIndex] = {
                         min: 0,
                         max: labels.length - 1,
-                        /* options: {
-                            floor: values[0],
-                            ceil: values[values.length - 1],
 
-                        }*/
 
                         options: {
                             stepsArray: labels.slice(), // equals to ['A', 'B', ... 'Z']
@@ -73,7 +58,6 @@
 
                         $http.get('../php/getMeterValues.php?app=' + charts.app + '&type=' + charts.types[valueIndex] + '&number=' + valueIndex + '&number2=' + j + '&date=' + values[j] + '&offset=' + offset).success(function (data) {
 
-                            console.log(data);
                             var index1 = Object.keys(data)[0];
                             var index2 = data[index1]['number2'];
 

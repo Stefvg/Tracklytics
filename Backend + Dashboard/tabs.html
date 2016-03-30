@@ -23,7 +23,9 @@
                             <li ng-class="{ current:tab.isSet(5) }">
                                 <a href ng-click="tab.setTab(5); main.refreshSlider()">Meters</a>
                             </li>
-
+                            <li ng-class="{ current:tab.isSet(6) }">
+                                <a href ng-click="tab.setTab(6)">Settings</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -44,6 +46,7 @@
     <histogram ng-show="tab.isSet(4)" ng-controller="HistogramController as hist"></histogram>
     <!--  Review Tab's Content  -->
     <meters ng-show="tab.isSet(5)" ng-controller="MeterController as meter"></meters>
+    <settings ng-show="tab.isSet(6)" ng-controller="SettingsController as settings"></settings>
 
 
 </section>

@@ -2,7 +2,7 @@
  * Created by stefvangils on 14/11/15.
  */
 (function(){
-    var app = angular.module('thesis', ['counter', 'timer', 'gauge', 'histogram', 'meter']);
+    var app = angular.module('thesis', ['counter', 'timer', 'gauge', 'histogram', 'meter', 'settings']);
 
 
 
@@ -44,6 +44,12 @@
         return {
             restrict:"E",
             templateUrl: "/angular-extensions/histogram.html"
+        };
+    });
+    app.directive("settings", function() {
+        return {
+            restrict:"E",
+            templateUrl: "/angular-extensions/settings.html"
         };
     });
 

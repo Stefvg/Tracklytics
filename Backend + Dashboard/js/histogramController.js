@@ -37,7 +37,6 @@
                     $scope.labels[valueIndex] = values;
 
                     var offset = object['offset'];
-                    console.log(offset);
                     $scope.slider[valueIndex] = {
                         min: values[0],
                         max: values[values.length - 1],
@@ -51,14 +50,12 @@
 
                     };
 
-                    console.log("i: " + valueIndex);
                     for(var j=0; j<values.length; j++){
                         $http.get('../php/getHistogramNumberOfValues.php?app=' + hist.app + '&type=' + hist.types[valueIndex] +'&number=' + valueIndex + '&number2=' +j +'&value=' + values[j] + '&offset=' + offset).success(function(data){
                             var index1 = Object.keys(data)[0];
                             var index2 = data[index1]['number2'];
                             hist.tempValues[index2] = data[index1]['count'];
                             if(index2==$scope.labels[index1].length-1){
-                                console.log(hist.tempValues);
                                 $scope.data[index1] = [hist.tempValues];
 
                             }
@@ -94,14 +91,12 @@ function updateChart($scope, sliderID, hist, $http) {
 
             var offset = object['offset'];
 
-                console.log("i: " + offset);
                 for(var j=0; j<values.length; j++){
                     $http.get('../php/getHistogramNumberOfValues.php?app=' + hist.app + '&type=' + hist.types[valueIndex] +'&number=' + valueIndex + '&number2=' +j +'&value=' + values[j] +'&offset=' + offset).success(function(data){
                         var index1 = Object.keys(data)[0];
                         var index2 = data[index1]['number2'];
                         hist.tempValues[index2] = data[index1]['count'];
                         if(index2==$scope.labels[index1].length-1){
-                            console.log(hist.tempValues);
                             $scope.data[index1] = [hist.tempValues];
 
                         }

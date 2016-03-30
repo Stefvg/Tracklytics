@@ -13,7 +13,6 @@
         var test = new Array();
         $http.get('../php/getTimerTypes.php?app=' + timer.app).success(function(data){
             timer.timers = data;
-            console.log(data);
             for(var i=0; i<data.length; i++){
                 $http.get('../php/getTimerData.php?app=' + timer.app + '&type=' + data[i] +"&number=" +i).success(function(data){
                     timer.objects[Object.keys(data)[0]] = data[Object.keys(data)];
