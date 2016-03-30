@@ -11,7 +11,6 @@
 @interface MeterController : NSObject
 
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *name;
 
 /**
  * Add an entry manually to the meter.

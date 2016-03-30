@@ -28,7 +28,7 @@ static NSString *uuid;
         uuid = [[NSUUID UUID] UUIDString];
         UIDeviceHardware *h=[[UIDeviceHardware alloc] init];
         device = [h platform];
-        [[VersionTracker new] getVersion:device];
+        //[[VersionTracker new] getVersion:device];
         firstRun = YES;
         
         array = [NSMutableArray new];
@@ -195,14 +195,13 @@ static NSString *uuid;
     });
 }
 
-+(MeterController *) createNewMeter:(NSString *)type withName:(NSString *)name {
++(MeterController *) createNewMeter:(NSString *)type{
     MeterController *meter = [MeterController new];
     meter.type = type;
-    meter.name = name;
     return meter;
 }
 
-+(void) addMeterEntryWithType:(NSString *)type withName:(NSString *)name withValue:(NSNumber *)value{
++(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value{
     NSDate *date = [NSDate date];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSManagedObjectContext *context =
@@ -211,7 +210,7 @@ static NSString *uuid;
         meter = [NSEntityDescription
                      insertNewObjectForEntityForName:@"Meter"
                      inManagedObjectContext:context];
-        meter.name = name;
+        meter.name = @"";
         meter.type = type;
         meter.value = value;
         meter.date = date;

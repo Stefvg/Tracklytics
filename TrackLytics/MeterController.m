@@ -15,7 +15,7 @@
 
 -(void) addEntry:(float)value {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [TrackLytics addMeterEntryWithType:self.type withName:self.name withValue:[NSNumber numberWithFloat:value]];
+        [TrackLytics addMeterEntryWithType:self.type withValue:[NSNumber numberWithFloat:value]];
     });
 }
 

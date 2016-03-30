@@ -101,15 +101,13 @@
  *
  * @param   type
  *          The type of the meter. This is used to differentiate in which diagram the meter will appear on the dashboard.
- * @param   name
- *          The name is used to differentiate the meter within the diagram from other meters.
  */
-+(MeterController *) createNewMeter:(NSString *) type withName:(NSString *) name;
++(MeterController *) createNewMeter:(NSString *) type;
 
 /**
  * This method should not be used in the app.
  */
-+(void) addMeterEntryWithType:(NSString *)type withName:(NSString *)name withValue:(NSNumber *)value;
++(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value;
 
 /**
  * This method should not be used in the app.
