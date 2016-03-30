@@ -212,30 +212,31 @@ static BOOL shouldMonitor;
 }
 
 +(MeterController *) createNewMeter:(NSString *)type{
-    if(shouldMonitor){
-        MeterController *meter = [MeterController new];
-        meter.type = type;
-        return meter;
-    }else return nil;
+    MeterController *meter = [MeterController new];
+    meter.type = type;
+    return meter;
+    
 }
 
 +(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value{
-    NSDate *date = [NSDate date];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        NSManagedObjectContext *context =
-        [[StorageManager sharedInstance] getContext];
-        Meter *meter;
-        meter = [NSEntityDescription
-                 insertNewObjectForEntityForName:@"Meter"
-                 inManagedObjectContext:context];
-        meter.name = @"";
-        meter.type = type;
-        meter.value = value;
-        meter.date = date;
-        [self save];
-        [array addObject:meter];
-        
-    });
+    if(shouldMonitor){
+        NSDate *date = [NSDate date];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            NSManagedObjectContext *context =
+            [[StorageManager sharedInstance] getContext];
+            Meter *meter;
+            meter = [NSEntityDescription
+                     insertNewObjectForEntityForName:@"Meter"
+                     inManagedObjectContext:context];
+            meter.name = @"";
+            meter.type = type;
+            meter.value = value;
+            meter.date = date;
+            [self save];
+            [array addObject:meter];
+            
+        });
+    }
 }
 
 +(NSArray *) getPreviousRequests {
