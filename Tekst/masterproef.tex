@@ -32,6 +32,17 @@
  {\newcommand{\lipsum}[1][11-13]{\par Hier komt wat tekst: lipsum ##1.\par}}
 %%%%%%%
 
+%%%%%%%
+% Gebruikt om \texttt{} line breaks uit te voeren indien nodig
+\newcommand*\justify{%
+  \fontdimen2\font=0.4em% interword space
+  \fontdimen3\font=0.2em% interword stretch
+  \fontdimen4\font=0.1em% interword shrink
+  \fontdimen7\font=0.1em% extra space
+  \hyphenchar\font=`\-% allowing hyphenation
+}
+%%%%%%%
+
 %\includeonly{hfdst-n}
 \begin{document}
 
