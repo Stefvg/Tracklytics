@@ -10,7 +10,6 @@
 #import "HTTPPost.h"
 #import "StorageManager.h"
 #import "UIDeviceHardware.h"
-#import "VersionTracker.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "Reachability.h"
 
