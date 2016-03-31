@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'Tracklytics_Example', :exclusive => true do
+  pod 'Tracklytics', :path => '../'
+end
+
+target 'Tracklytics_Tests', :exclusive => true do
+  pod 'Tracklytics', :path => '../'
+
+  
+end
