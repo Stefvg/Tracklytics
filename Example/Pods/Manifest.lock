@@ -1,0 +1,14 @@
+PODS:
+  - Tracklytics (0.1.0)
+
+DEPENDENCIES:
+  - Tracklytics (from `../`)
+
+EXTERNAL SOURCES:
+  Tracklytics:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Tracklytics: e4620b88c25e869ded875512b14851b488d93236
+
+COCOAPODS: 0.38.2

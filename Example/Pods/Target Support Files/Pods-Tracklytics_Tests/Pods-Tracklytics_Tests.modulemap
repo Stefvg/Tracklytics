@@ -1,0 +1,6 @@
+framework module Pods_Tracklytics_Tests {
+  umbrella header "Pods-Tracklytics_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
