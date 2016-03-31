@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/stefvangils/Dropbox/Thesis/Github/Tracklytics/Tracklytics/Example/build/Debug-iphonesimulator/Tracklytics.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Tracklytics-Swift.h",
+          'external-contents': "/Users/stefvangils/Dropbox/Thesis/Github/Tracklytics/Tracklytics/Example/build/Debug-iphonesimulator/Tracklytics.framework/Headers/Tracklytics-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "Tracklytics-umbrella.h",
+          'external-contents': "/Users/stefvangils/Dropbox/Thesis/Github/Tracklytics/Tracklytics/Example/Pods/Target Support Files/Tracklytics/Tracklytics-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/stefvangils/Dropbox/Thesis/Github/Tracklytics/Tracklytics/Example/build/Debug-iphonesimulator/Tracklytics.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/stefvangils/Dropbox/Thesis/Github/Tracklytics/Tracklytics/Example/build/Pods.build/Debug-iphonesimulator/Tracklytics.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
