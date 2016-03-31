@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="Core" representedClassName="Core" isAbstract="YES" syncable="YES">
+        <attribute name="connectionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="databaseID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shouldBeSynced" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CounterObject" representedClassName="CounterObject" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Gauge" representedClassName="Gauge" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Histogram" representedClassName="Histogram" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Meter" representedClassName="Meter" parentEntity="Core" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Timer" representedClassName="Timer" parentEntity="Core" syncable="YES">
+        <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Core" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="CounterObject" positionX="0" positionY="0" width="128" height="58"/>
+        <element name="Gauge" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="Histogram" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="Meter" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="Timer" positionX="0" positionY="0" width="128" height="60"/>
+    </elements>
+</model>
