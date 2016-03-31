@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Tracklytics"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "A Monitoring library for iOS"
 
 # This description is used to generate tags and improve search results.
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = "https://github.com/stefvg/Tracklytics"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
+  s.license          = 'KU Leuven'
   s.author           = { "Stefvg" => "stefvg1993@gmail.com" }
   s.source           = { :git => "https://github.com/stefvg/Tracklytics.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
