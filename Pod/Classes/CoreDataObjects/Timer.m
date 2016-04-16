@@ -25,12 +25,12 @@
 
 -(void) stop {
     NSDate *stopTime = [NSDate date];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSTimeInterval secondsBetween = [stopTime timeIntervalSinceDate:startTime];
         self.durationTime = [NSNumber numberWithFloat:secondsBetween];
         self.shouldBeSynced = [NSNumber numberWithBool:YES];
         [TrackLytics addRequest:self];
-    });
+    //});
 }
 
 -(NSString *) getURL {
