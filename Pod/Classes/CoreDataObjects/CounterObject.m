@@ -31,39 +31,39 @@
 }
 
 -(void) inc {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+   // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSInteger value = [self.value integerValue];
         value++;
         self.value = [NSNumber numberWithInteger:value];
         [TrackLytics addRequest:self];
-    });
+    //});
 }
 
 -(void) inc:(NSInteger)number {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+   // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSInteger value = [self.value integerValue];
         value+=number;
         self.value = [NSNumber numberWithInteger:value];
         [TrackLytics addRequest:self];
-    });
+    //});
 }
 
 -(void) dec {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSInteger value = [self.value integerValue];
         value--;
         self.value = [NSNumber numberWithInteger:value];
         [TrackLytics addRequest:self];
-    });
+    //});
 }
 
 -(void) dec:(NSInteger)number {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSInteger value = [self.value integerValue];
         value-=number;
         self.value = [NSNumber numberWithInteger:value];
         [TrackLytics addRequest:self];
-    });
+    //});
 }
 
 @end

@@ -14,9 +14,9 @@
 }
 
 -(void) addEntry:(float)value {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [TrackLytics addMeterEntryWithType:self.type withValue:[NSNumber numberWithFloat:value]];
-    });
+    //});
 }
 
 
@@ -27,9 +27,9 @@
 }
 
 -(void) collectNewData {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [self addEntry:[meterInterface getValue]];
-    });
+    //});
 }
 
 -(void) stop {
