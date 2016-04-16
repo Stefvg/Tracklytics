@@ -45,12 +45,12 @@ static BOOL shouldMonitor;
 }
 
 +(void) addRequest:(Core *) request {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+   // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         if(![array containsObject:request]){
             [array addObject:request];
         }
         [self save];
-    });
+    //});
 }
 
 +(void) sendRequests {
@@ -173,7 +173,7 @@ static BOOL shouldMonitor;
 +(void) createNewGaugeWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger) value {
     if(shouldMonitor){
         NSDate *date = [NSDate date];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSManagedObjectContext *context =
             [[StorageManager sharedInstance] getContext];
             Gauge *gauge;
@@ -186,14 +186,14 @@ static BOOL shouldMonitor;
             gauge.date = date;
             [self save];
             [array addObject:gauge];
-        });
+        //});
     }
 }
 
 +(void) createNewHistogramWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger)value{
     if(shouldMonitor){
         NSDate *date = [NSDate date];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+       // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSManagedObjectContext *context =
             [[StorageManager sharedInstance] getContext];
             Histogram *histogram;
@@ -207,7 +207,7 @@ static BOOL shouldMonitor;
             [self save];
             [array addObject:histogram];
             
-        });
+        //});
     }
 }
 
@@ -221,7 +221,7 @@ static BOOL shouldMonitor;
 +(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value{
     if(shouldMonitor){
         NSDate *date = [NSDate date];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+      //  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSManagedObjectContext *context =
             [[StorageManager sharedInstance] getContext];
             Meter *meter;
@@ -235,7 +235,7 @@ static BOOL shouldMonitor;
             [self save];
             [array addObject:meter];
             
-        });
+       // });
     }
 }
 
