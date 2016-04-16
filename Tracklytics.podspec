@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Tracklytics"
-  s.version          = "0.2.0"
+  s.version          = "0.2.1"
   s.summary          = "A Monitoring library for iOS"
 
 # This description is used to generate tags and improve search results.
@@ -32,8 +32,9 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'Tracklytics' => ['Pod/Assets/*.png']
   }
+  s.resources = 'Pod/Classes/CoreData/*.xcdatamodeld'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'CoreTelephony', 'CoreData'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
