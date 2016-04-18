@@ -129,6 +129,7 @@ static BOOL shouldMonitor;
         counter.type = type;
         counter.date = date;
         [array addObject:counter];
+        [self save];
         return counter;
     }else return nil;
 }
@@ -147,6 +148,7 @@ static BOOL shouldMonitor;
         counter.date = date;
         [counter inc:value];
         [array addObject:counter];
+        [self save];
         return counter;
     }else return nil;
 }
