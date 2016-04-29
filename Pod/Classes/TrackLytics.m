@@ -22,10 +22,14 @@ static NSString *previousConnectionType;
 static BOOL firstRun;
 static NSString *uuid;
 static BOOL shouldMonitor;
+static NSTimer *timer;
+static BOOL isSending;
 
 +(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
+    timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         appCode = code;
+        array = [NSMutableArray new];
         [self checkShouldMonitor];
         
         uuid = [[NSUUID UUID] UUIDString];
@@ -34,60 +38,65 @@ static BOOL shouldMonitor;
         //[[VersionTracker new] getVersion:device];
         firstRun = YES;
         
-        array = [NSMutableArray new];
+        
         [array addObjectsFromArray:[self getPreviousRequests]];
         [self sendRequests];
-        if(shouldMonitor){
-            [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
+        if(!shouldMonitor){
+            [timer invalidate];
         }
         
     });
 }
 
 +(void) addRequest:(Core *) request {
-   // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        if(![array containsObject:request]){
-            [array addObject:request];
-        }
-        [self save];
+    // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    if(![array containsObject:request]){
+        [array addObject:request];
+    }
+    [self save];
     //});
 }
 
 +(void) sendRequests {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        HTTPPost *httpPost = [HTTPPost new];
-        NSLog(@"Sending %ld tracks which are not yet synced to the server", (unsigned long)array.count);
-        NSArray *copyOfArray = [NSArray arrayWithArray:array];
-        for (Core *request in copyOfArray) {
-            NSString *url = [request getURL];
-            @try {
-                NSDictionary *dict = [request getData];
-                NSArray *split;
-                if(dict.count>0){
-                    NSData *data = [httpPost postSynchronous:url data:dict];
-                    NSString *message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                    split = [message componentsSeparatedByString:@"#"];
-                    
-                    while(split.count!=2 || ![[split objectAtIndex:1]  isEqual: @"SUCCESS"]) {
-                        data = [httpPost postSynchronous:url data:dict];
-                        message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    if(!isSending){
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            isSending = YES;
+            HTTPPost *httpPost = [HTTPPost new];
+            NSLog(@"Sending %ld tracks which are not yet synced to the server", (unsigned long)array.count);
+            NSArray *copyOfArray = [NSArray arrayWithArray:array];
+            array = [NSMutableArray new];
+            for (Core *request in copyOfArray) {
+                NSString *url = [request getURL];
+                @try {
+                    NSDictionary *dict = [request getData];
+                    NSArray *split;
+                    if(dict.count>0){
+                        NSData *data = [httpPost postSynchronous:url data:dict];
+                        NSString *message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
                         split = [message componentsSeparatedByString:@"#"];
+                        
+                        while(split.count!=2 || ![[split objectAtIndex:1]  isEqual: @"SUCCESS"]) {
+                            data = [httpPost postSynchronous:url data:dict];
+                            message = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                            split = [message componentsSeparatedByString:@"#"];
+                        }
                     }
+                    [array removeObject:request];
+                    if(firstRun){
+                        [self deleteRequest:request];
+                    }else {
+                        request.databaseID = [split objectAtIndex:0];
+                    }
+                    
                 }
-                [array removeObject:request];
-                if(firstRun){
-                    [self deleteRequest:request];
-                }else {
-                    request.databaseID = [split objectAtIndex:0];
+                @catch (NSException *exception) {
                 }
-                
             }
-            @catch (NSException *exception) {
-            }
-        }
-        [self save];
-        firstRun = NO;
-    });
+            [self save];
+            firstRun = NO;
+            isSending = NO;
+        });
+    }
     
 }
 
@@ -176,18 +185,18 @@ static BOOL shouldMonitor;
     if(shouldMonitor){
         NSDate *date = [NSDate date];
         //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSManagedObjectContext *context =
-            [[StorageManager sharedInstance] getContext];
-            Gauge *gauge;
-            gauge = [NSEntityDescription
-                     insertNewObjectForEntityForName:@"Gauge"
-                     inManagedObjectContext:context];
-            gauge.name = name;
-            gauge.type = type;
-            gauge.value = [NSNumber numberWithInteger:value];
-            gauge.date = date;
-            [self save];
-            [array addObject:gauge];
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Gauge *gauge;
+        gauge = [NSEntityDescription
+                 insertNewObjectForEntityForName:@"Gauge"
+                 inManagedObjectContext:context];
+        gauge.name = name;
+        gauge.type = type;
+        gauge.value = [NSNumber numberWithInteger:value];
+        gauge.date = date;
+        [self save];
+        [array addObject:gauge];
         //});
     }
 }
@@ -195,20 +204,20 @@ static BOOL shouldMonitor;
 +(void) createNewHistogramWithType:(NSString *)type withName:(NSString *)name withValue:(NSInteger)value{
     if(shouldMonitor){
         NSDate *date = [NSDate date];
-       // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSManagedObjectContext *context =
-            [[StorageManager sharedInstance] getContext];
-            Histogram *histogram;
-            histogram = [NSEntityDescription
-                         insertNewObjectForEntityForName:@"Histogram"
-                         inManagedObjectContext:context];
-            histogram.name = name;
-            histogram.type = type;
-            histogram.date = date;
-            histogram.value = [NSNumber numberWithInteger:value];
-            [self save];
-            [array addObject:histogram];
-            
+        // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Histogram *histogram;
+        histogram = [NSEntityDescription
+                     insertNewObjectForEntityForName:@"Histogram"
+                     inManagedObjectContext:context];
+        histogram.name = name;
+        histogram.type = type;
+        histogram.date = date;
+        histogram.value = [NSNumber numberWithInteger:value];
+        [self save];
+        [array addObject:histogram];
+        
         //});
     }
 }
@@ -223,21 +232,21 @@ static BOOL shouldMonitor;
 +(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value{
     if(shouldMonitor){
         NSDate *date = [NSDate date];
-      //  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSManagedObjectContext *context =
-            [[StorageManager sharedInstance] getContext];
-            Meter *meter;
-            meter = [NSEntityDescription
-                     insertNewObjectForEntityForName:@"Meter"
-                     inManagedObjectContext:context];
-            meter.name = @"";
-            meter.type = type;
-            meter.value = value;
-            meter.date = date;
-            [self save];
-            [array addObject:meter];
-            
-       // });
+        //  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSManagedObjectContext *context =
+        [[StorageManager sharedInstance] getContext];
+        Meter *meter;
+        meter = [NSEntityDescription
+                 insertNewObjectForEntityForName:@"Meter"
+                 inManagedObjectContext:context];
+        meter.name = @"";
+        meter.type = type;
+        meter.value = value;
+        meter.date = date;
+        [self save];
+        [array addObject:meter];
+        
+        // });
     }
 }
 
@@ -271,7 +280,6 @@ static BOOL shouldMonitor;
 
 +(void) deleteRequest:(Core *) request {
     [[[StorageManager sharedInstance]  getContext] deleteObject:request];
-    [self save];
 }
 
 +(void) save {
