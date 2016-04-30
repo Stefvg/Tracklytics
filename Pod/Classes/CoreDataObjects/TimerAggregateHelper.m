@@ -6,7 +6,7 @@
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
-#import "TimerAggregate.h"
+#import "TimerAggregateHelper.h"
 #import "TrackLytics.h"
 
 @implementation Timer{

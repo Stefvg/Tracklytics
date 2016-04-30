@@ -9,11 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "TimerAggregate.h"
+#import "TimerAggregateHelper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TimerAggregate (CoreDataProperties)
+@interface TimerAggregateHelper (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSNumber *numberOfMeasurements;
 @property (nullable, nonatomic, retain) NSNumber *totalTime;

@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "TimerAggregate+CoreDataProperties.h"
+#import "TimerAggregateHelper+CoreDataProperties.h"
 
-@implementation TimerAggregate (CoreDataProperties)
+@implementation TimerAggregateHelper (CoreDataProperties)
 
 @dynamic numberOfMeasurements;
 @dynamic totalTime;
