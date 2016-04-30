@@ -34,7 +34,6 @@
     
     float newValue = [self.totalTime floatValue] + secondsBetween;
     self.totalTime = [NSNumber numberWithFloat:newValue];
-    NSNumber *number = [NSNumber numberWithFloat:newValue];
     NSInteger x = [self.numberOfMeasurements integerValue] +1;
     self.numberOfMeasurements = [NSNumber numberWithInteger: x];
     NSLog(@"%f", newValue);
