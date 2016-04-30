@@ -11,9 +11,8 @@
 #import "StorageManager.h"
 #import "UIDeviceHardware.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import "TimerAggregateHelper.h"
 #import "Reachability.h"
-#import "TimerAggregateHelper.h";
-
 @implementation TrackLytics
 
 static NSMutableArray *array;
