@@ -9,7 +9,7 @@
 #import "TimerAggregateHelper.h"
 #import "TrackLytics.h"
 
-@implementation Timer{
+@implementation TimerAggregateHelper{
     NSDate *startTime;
 }
 
