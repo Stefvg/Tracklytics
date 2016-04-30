@@ -53,6 +53,10 @@
 		E13DF8731CAD2B650028E916 /* TrackLytics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E13DF84B1CAD2B650028E916 /* TrackLytics.xcdatamodeld */; };
 		E13DF8741CAD2B650028E916 /* UIDeviceHardware.h in Headers */ = {isa = PBXBuildFile; fileRef = E13DF84D1CAD2B650028E916 /* UIDeviceHardware.h */; };
 		E13DF8751CAD2B650028E916 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = E13DF84E1CAD2B650028E916 /* UIDeviceHardware.m */; };
+		E17329761CD4E18B00A6A521 /* TimerAggregateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E17329721CD4E18B00A6A521 /* TimerAggregateHelper.h */; };
+		E17329771CD4E18B00A6A521 /* TimerAggregateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E17329731CD4E18B00A6A521 /* TimerAggregateHelper.m */; };
+		E17329781CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E17329741CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.h */; };
+		E17329791CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E17329751CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.m */; };
 		E3ADCE97EFD49E4C354901F4B53EEFC6 /* Tracklytics-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F80B90331ACDED56E62A7E50A88030C2 /* Tracklytics-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EEE43907F516D40CC5FE9864A29AB229 /* Pods-Tracklytics_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6502B30BC125AC63BC816E81F1872DB /* Pods-Tracklytics_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0C42EE3C47E6A7CB5D0E0C16AC8D402 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF92CAECA63E48446CD6E367CDDAED1 /* Foundation.framework */; };
@@ -152,6 +156,10 @@
 		E13DF84C1CAD2B650028E916 /* TrackLytics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrackLytics.xcdatamodel; sourceTree = "<group>"; };
 		E13DF84D1CAD2B650028E916 /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDeviceHardware.h; sourceTree = "<group>"; };
 		E13DF84E1CAD2B650028E916 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDeviceHardware.m; sourceTree = "<group>"; };
+		E17329721CD4E18B00A6A521 /* TimerAggregateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerAggregateHelper.h; sourceTree = "<group>"; };
+		E17329731CD4E18B00A6A521 /* TimerAggregateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerAggregateHelper.m; sourceTree = "<group>"; };
+		E17329741CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TimerAggregateHelper+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E17329751CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TimerAggregateHelper+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E2945E3876743B1726A243346A493C0F /* Pods-Tracklytics_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tracklytics_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F80B90331ACDED56E62A7E50A88030C2 /* Tracklytics-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Tracklytics-umbrella.h"; sourceTree = "<group>"; };
 		FB34C951AA57F39E25BA0DD7E59357D4 /* Tracklytics-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Tracklytics-dummy.m"; sourceTree = "<group>"; };
@@ -325,6 +333,10 @@
 				E13DF83C1CAD2B650028E916 /* Timer+CoreDataProperties.m */,
 				E13DF83D1CAD2B650028E916 /* Timer.h */,
 				E13DF83E1CAD2B650028E916 /* Timer.m */,
+				E17329721CD4E18B00A6A521 /* TimerAggregateHelper.h */,
+				E17329731CD4E18B00A6A521 /* TimerAggregateHelper.m */,
+				E17329741CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.h */,
+				E17329751CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.m */,
 			);
 			path = CoreDataObjects;
 			sourceTree = "<group>";
@@ -409,7 +421,9 @@
 				E13DF8711CAD2B650028E916 /* TrackLytics.h in Headers */,
 				E13DF8551CAD2B650028E916 /* CounterObject.h in Headers */,
 				E13DF85F1CAD2B650028E916 /* Meter+CoreDataProperties.h in Headers */,
+				E17329781CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.h in Headers */,
 				E13DF8741CAD2B650028E916 /* UIDeviceHardware.h in Headers */,
+				E17329761CD4E18B00A6A521 /* TimerAggregateHelper.h in Headers */,
 				E13DF86D1CAD2B650028E916 /* Reachability.h in Headers */,
 				E13DF8611CAD2B650028E916 /* Meter.h in Headers */,
 				E13DF84F1CAD2B650028E916 /* Core+CoreDataProperties.h in Headers */,
@@ -557,6 +571,7 @@
 				332C2FFAA868C2A78B855D8BC2EF557A /* Pods-Tracklytics_Example-dummy.m in Sources */,
 				E13DF85C1CAD2B650028E916 /* Histogram+CoreDataProperties.m in Sources */,
 				E13DF8601CAD2B650028E916 /* Meter+CoreDataProperties.m in Sources */,
+				E17329791CD4E18B00A6A521 /* TimerAggregateHelper+CoreDataProperties.m in Sources */,
 				E13DF85E1CAD2B650028E916 /* Histogram.m in Sources */,
 				E13DF8641CAD2B650028E916 /* Timer+CoreDataProperties.m in Sources */,
 				E13DF8621CAD2B650028E916 /* Meter.m in Sources */,
@@ -564,6 +579,7 @@
 				E13DF86C1CAD2B650028E916 /* MeterInterface.m in Sources */,
 				E13DF8521CAD2B650028E916 /* Core.m in Sources */,
 				E13DF8581CAD2B650028E916 /* Gauge+CoreDataProperties.m in Sources */,
+				E17329771CD4E18B00A6A521 /* TimerAggregateHelper.m in Sources */,
 				E13DF8561CAD2B650028E916 /* CounterObject.m in Sources */,
 				E13DF85A1CAD2B650028E916 /* Gauge.m in Sources */,
 				E13DF8751CAD2B650028E916 /* UIDeviceHardware.m in Sources */,

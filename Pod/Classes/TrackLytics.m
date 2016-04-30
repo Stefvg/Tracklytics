@@ -12,10 +12,13 @@
 #import "UIDeviceHardware.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "Reachability.h"
+#import "TimerAggregateHelper.h";
 
 @implementation TrackLytics
 
 static NSMutableArray *array;
+static NSMutableDictionary *timerAggregates;
+
 static NSInteger appCode;
 static NSString *device;
 static NSString *previousConnectionType;
@@ -24,12 +27,15 @@ static NSString *uuid;
 static BOOL shouldMonitor;
 static NSTimer *timer;
 static BOOL isSending;
+static BOOL aggregateOnDevice;
 
 +(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
     timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
+    aggregateOnDevice = YES;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         appCode = code;
         array = [NSMutableArray new];
+        timerAggregates = [NSMutableDictionary new];
         [self checkShouldMonitor];
         
         uuid = [[NSUUID UUID] UUIDString];
@@ -169,13 +175,32 @@ static BOOL isSending;
         NSManagedObjectContext *context =
         [[StorageManager sharedInstance] getContext];
         Timer *timer;
-        timer = [NSEntityDescription
-                 insertNewObjectForEntityForName:@"Timer"
-                 inManagedObjectContext:context];
-        timer.name = name;
-        timer.type = type;
-        timer.date = date;
-        [array addObject:timer];
+        
+        if(aggregateOnDevice){
+            TimerAggregateHelper *helper = [timerAggregates objectForKey:type];
+            if(helper != null && [helper.name isEqualToString:name]){
+                [helper start];
+                timer = helper;
+            }else {
+                timer = [NSEntityDescription
+                         insertNewObjectForEntityForName:@"TimerAggregateHelper"
+                         inManagedObjectContext:context];
+                timer.name = name;
+                timer.type = type;
+                timer.date = date;
+            }
+            
+            
+        }else {
+            timer = [NSEntityDescription
+                     insertNewObjectForEntityForName:@"Timer"
+                     inManagedObjectContext:context];
+            timer.name = name;
+            timer.type = type;
+            timer.date = date;
+            [array addObject:timer];
+        }
+        
         
         return timer;
     }else return nil;
