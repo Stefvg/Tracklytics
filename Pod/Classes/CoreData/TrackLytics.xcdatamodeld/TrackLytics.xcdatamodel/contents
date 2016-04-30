@@ -23,7 +23,7 @@
     <entity name="Timer" representedClassName="Timer" parentEntity="Core" syncable="YES">
         <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
-    <entity name="TimerAggregateHelper" parentEntity="Timer" syncable="YES">
+    <entity name="TimerAggregateHelper" representedClassName="TimerAggregateHelper" parentEntity="Timer" syncable="YES">
         <attribute name="numberOfMeasurements" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
