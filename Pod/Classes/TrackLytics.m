@@ -178,7 +178,7 @@ static BOOL aggregateOnDevice;
         
         if(aggregateOnDevice){
             TimerAggregateHelper *helper = [timerAggregates objectForKey:type];
-            if(helper != null && [helper.name isEqualToString:name]){
+            if(helper != NULL && [helper.name isEqualToString:name]){
                 [helper start];
                 timer = helper;
             }else {
