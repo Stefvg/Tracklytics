@@ -18,7 +18,8 @@
 - (void)awakeFromInsert
 {
     [super awakeFromInsert];
-   // self.shouldBeSynced = [NSNumber numberWithBool:NO];
+    self.shouldBeSynced = [NSNumber numberWithBool:YES];
+    self.totalTime = 0;
     
 }
 
@@ -30,10 +31,14 @@
     NSDate *stopTime = [NSDate date];
     //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
     NSTimeInterval secondsBetween = [stopTime timeIntervalSinceDate:startTime];
+    
     float newValue = [self.totalTime floatValue] + secondsBetween;
     self.totalTime = [NSNumber numberWithFloat:newValue];
-    self.numberOfMeasurements = [NSNumber numberWithFloat:[self.totalTime integerValue] +1];
-    //});
+    NSNumber *number = [NSNumber numberWithFloat:newValue];
+    NSInteger x = [self.numberOfMeasurements integerValue] +1;
+    self.numberOfMeasurements = [NSNumber numberWithInteger: x];
+    NSLog(@"%f", newValue);
+    [TrackLytics save];
 }
 
 -(NSString *) getURL {
@@ -42,8 +47,14 @@
 
 -(NSDictionary *) getData {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[super getMetadata]];
-    //[dictionary setObject:self.durationTime forKey:@"durationTime"];
+    [dictionary setObject:self.numberOfMeasurements forKey:@"measurements"];
+    [dictionary setObject:[self getMean] forKey:@"mean"];
     return dictionary;
+}
+
+-(NSNumber *) getMean{
+    float mean = [self.totalTime floatValue] / [self.numberOfMeasurements floatValue];
+    return [NSNumber numberWithFloat:mean];
 }
 
 @end

@@ -113,4 +113,6 @@
  * This method should not be used in the app.
  */
 +(NSDictionary *) getMetaData;
+
++(void) save;
 @end

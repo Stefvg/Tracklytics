@@ -179,16 +179,18 @@ static BOOL aggregateOnDevice;
             TimerAggregateHelper *helper = [timerAggregates objectForKey:type];
             if(helper != NULL && [helper.name isEqualToString:name]){
                 [helper start];
-                timer = helper;
+                
             }else {
-                timer = [NSEntityDescription
+                helper = [NSEntityDescription
                          insertNewObjectForEntityForName:@"TimerAggregateHelper"
                          inManagedObjectContext:context];
-                timer.name = name;
-                timer.type = type;
-                timer.date = date;
+                helper.name = name;
+                helper.type = type;
+                helper.date = date;
+                [helper start];
+                [timerAggregates setObject:helper forKey:type];
             }
-            
+            timer = helper;
             
         }else {
             timer = [NSEntityDescription
