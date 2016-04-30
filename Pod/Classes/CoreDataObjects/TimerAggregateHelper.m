@@ -30,8 +30,9 @@
     NSDate *stopTime = [NSDate date];
     //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
     NSTimeInterval secondsBetween = [stopTime timeIntervalSinceDate:startTime];
-    self.totalTime += [NSNumber numberWithFloat:secondsBetween];
-    self.numberOfMeasurements++;
+    float newValue = [self.totalTime floatValue] + secondsBetween;
+    self.totalTime = [NSNumber numberWithFloat:newValue];
+    self.numberOfMeasurements = [NSNumber numberWithFloat:[self.totalTime integerValue] +1];
     //});
 }
 
