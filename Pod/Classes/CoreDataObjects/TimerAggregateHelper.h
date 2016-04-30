@@ -27,4 +27,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "TimerAggregate+CoreDataProperties.h"
+#import "TimerAggregateHelper+CoreDataProperties.h"
