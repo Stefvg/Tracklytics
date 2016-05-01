@@ -20,10 +20,15 @@ it, simply add the following line to your Podfile:
 pod "Tracklytics"
 ```
 
+Make sure you define iOS 7.0 in your podfile:
+
+```ruby
+platform :ios, '7.0'
+```
 ## Author
 
-Stefvg, stefvg1993@gmail.com
+Stefvg, stef.vangils@student.kuleuven.be
 
 ## License
 
-Tracklytics is available under the MIT license. See the LICENSE file for more info.
+Tracklytics is available under the KU Leuven license.
