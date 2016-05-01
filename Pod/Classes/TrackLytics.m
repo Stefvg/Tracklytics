@@ -30,12 +30,12 @@ static BOOL aggregateOnDevice;
 
 +(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
     timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
-    aggregateOnDevice = YES;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         appCode = code;
         array = [NSMutableArray new];
         timerAggregates = [NSMutableDictionary new];
         [self checkShouldMonitor];
+        [self checkShouldAggregateOnDevice];
         
         uuid = [[NSUUID UUID] UUIDString];
         UIDeviceHardware *h=[[UIDeviceHardware alloc] init];
@@ -353,6 +353,25 @@ static BOOL aggregateOnDevice;
         NSLog(@"Monitoring is turned on");
     }else {
         NSLog(@"Monitoring is turned off");
+    }
+    
+}
+
++(void) checkShouldAggregateOnDevice {
+    HTTPPost *post = [HTTPPost new];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:appCode] forKey:@"appCode"];
+    NSData *data = [post postSynchronous:@"https://svg-apache.iminds-security.be/backend/ShouldAggregateOnDevice.php" data:dict];
+    NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *shouldMonitorNumber = [f numberFromString:newStr];
+    
+    aggregateOnDevice = [shouldMonitorNumber boolValue];
+    
+    if(aggregateOnDevice){
+        NSLog(@"Aggregation On Device");
+    }else {
+        NSLog(@"Aggregation In Back end");
     }
     
 }
