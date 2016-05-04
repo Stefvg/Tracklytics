@@ -21,6 +21,12 @@
     self.shouldBeSynced = [NSNumber numberWithBool:NO];
     startTime = [NSDate date];
 }
+-(void) start {
+    
+    self.shouldBeSynced = [NSNumber numberWithBool:NO];
+    startTime = [NSDate date];
+
+}
 
 
 -(void) stop {

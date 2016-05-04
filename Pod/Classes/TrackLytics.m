@@ -146,6 +146,7 @@ static BOOL shouldSaveOnDisk;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"CounterObject" inManagedObjectContext:context];
             NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
             counter = (CounterObject *)unassociatedObject;
+            [counter initialize];
         }
         counter.name = name;
         counter.type = type;
@@ -174,6 +175,7 @@ static BOOL shouldSaveOnDisk;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"CounterObject" inManagedObjectContext:context];
             NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
             counter = (CounterObject *)unassociatedObject;
+            [counter initialize];
         }
         counter.name = name;
         counter.type = type;
@@ -209,6 +211,7 @@ static BOOL shouldSaveOnDisk;
                     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimerAggregateHelper" inManagedObjectContext:context];
                     NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
                     helper = (TimerAggregateHelper *)unassociatedObject;
+                    [helper initialize];
                 }
                 helper.name = name;
                 helper.type = type;
@@ -227,6 +230,8 @@ static BOOL shouldSaveOnDisk;
                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"Timer" inManagedObjectContext:context];
                 NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
                 timer = (Timer *)unassociatedObject;
+                [timer initialize];
+                [timer start];
             }
             timer.name = name;
             timer.type = type;
@@ -254,6 +259,7 @@ static BOOL shouldSaveOnDisk;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"Gauge" inManagedObjectContext:context];
             NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
             gauge = (Gauge *)unassociatedObject;
+            [gauge initialize];
         }
         gauge.name = name;
         gauge.type = type;
@@ -282,6 +288,7 @@ static BOOL shouldSaveOnDisk;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"Histogram" inManagedObjectContext:context];
             NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
             histogram = (Histogram *)unassociatedObject;
+            [histogram initialize];
         }
         histogram.name = name;
         histogram.type = type;
@@ -318,6 +325,7 @@ static BOOL shouldSaveOnDisk;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"Meter" inManagedObjectContext:context];
             NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
             meter = (Meter *)unassociatedObject;
+            [meter initialize];
         }
         meter.name = @"";
         meter.type = type;

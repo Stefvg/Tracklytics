@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Core : NSManagedObject
 
+-(void) initialize;
 /**
  * This method is purely used in the library. It shouldn't be used by a developer.
  */

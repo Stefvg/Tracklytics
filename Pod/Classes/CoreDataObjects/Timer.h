@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Insert code here to declare functionality of your managed object subclass
 
+
+-(void) start;
 /**
  * This method has to be called when the event is over and the timer has to be stopped.
  * If it doesn't get called, the timer doesn't get synced to the server.

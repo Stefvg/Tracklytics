@@ -22,6 +22,10 @@
    // });
 }
 
+-(void) initialize {
+    self.connectionType = [self getConnectionType];
+}
+
 -(NSDictionary *) getData {
     return [NSDictionary new];
 }
@@ -50,6 +54,9 @@
         }else {
             databaseID = self.databaseID;
         }
+
+        
+        
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjects:@[self.type, self.name, [self getDate], databaseID, self.connectionType] forKeys:@[@"type",@"name", @"date", @"databaseID", @"connectionType"]];
         [dictionary addEntriesFromDictionary:[TrackLytics getMetaData]];
         
