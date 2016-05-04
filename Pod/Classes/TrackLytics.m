@@ -30,12 +30,13 @@ static BOOL aggregateOnDevice;
 static BOOL shouldSaveOnDisk;
 
 +(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
+    appCode = code;
     timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
     [self checkShouldSaveOnDisk];
     shouldMonitor = YES;
     [self checkShouldMonitor];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        appCode = code;
+        
         array = [NSMutableArray new];
         timerAggregates = [NSMutableDictionary new];
         
