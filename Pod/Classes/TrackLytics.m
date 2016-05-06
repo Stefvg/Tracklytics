@@ -67,7 +67,6 @@ static BOOL shouldSaveOnDisk;
     if(![array containsObject:request]){
         [array addObject:request];
     }
-    [self save];
     //});
 }
 

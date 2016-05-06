@@ -7,7 +7,7 @@
 //
 
 #import "GaugeAggregateHelper.h"
-
+#import "TrackLytics.h"
 @implementation GaugeAggregateHelper{
     NSMutableArray *valueArray;
 }
@@ -17,6 +17,8 @@
 -(void) initialize{
     [super initialize];
     valueArray = [NSMutableArray new];
+    self.highest = [NSNumber numberWithInteger: INT_MIN];
+    self.lowest = [NSNumber numberWithInteger:INT_MAX];
 }
 
 -(void) addValue:(NSInteger) value {
@@ -41,6 +43,8 @@
     self.median = [self getMedian];
     numberOfMeasurements++;
     self.numberOfMeasurements = [NSNumber numberWithInteger:numberOfMeasurements];
+    [TrackLytics save];
+    [TrackLytics addRequest:self];
 }
 
 -(NSNumber *) getMedian {

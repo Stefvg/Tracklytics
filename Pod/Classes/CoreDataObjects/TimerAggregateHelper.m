@@ -36,8 +36,8 @@
     self.totalTime = [NSNumber numberWithFloat:newValue];
     NSInteger x = [self.numberOfMeasurements integerValue] +1;
     self.numberOfMeasurements = [NSNumber numberWithInteger: x];
-    NSLog(@"%f", newValue);
     [TrackLytics save];
+    [TrackLytics addRequest:self];
 }
 
 -(NSString *) getURL {
