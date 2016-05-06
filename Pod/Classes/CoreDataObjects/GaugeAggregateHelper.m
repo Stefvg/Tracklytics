@@ -9,6 +9,7 @@
 #import "GaugeAggregateHelper.h"
 
 @implementation GaugeAggregateHelper
+@dynamic valueArray;
 
 // Insert code here to add functionality to your managed object subclass
 
@@ -17,7 +18,7 @@
 }
 
 -(void) addValue:(NSInteger) value {
-    [self.valueArray addObject:value];
+    [self.valueArray addObject:[NSNumber numberWithInteger:value]];
     NSInteger numberOfMeasurements =  [self.numberOfMeasurements integerValue];
     float mean =  [self.numberOfMeasurements floatValue];
     NSInteger lowest =  [self.lowest integerValue];
@@ -35,12 +36,12 @@
     self.mean = [NSNumber numberWithFloat:mean];
     self.lowest = [NSNumber numberWithInteger:value];
     self.highest = [NSNumber numberWithInteger:highest];
-    self.median = [NSNumber numberWithInteger:[self getMedian]];
+    self.median = [self getMedian];
     numberOfMeasurements++;
 }
 
--(NSInteger) getMedian {
-    [self.valueArray ortUsingComparator:^(id obj1, id obj2) {
+-(NSNumber *) getMedian {
+    [self.valueArray sortUsingComparator:^(id obj1, id obj2) {
         if (obj1 > obj2)
             return NSOrderedAscending;
         else if (obj1 < obj2)
