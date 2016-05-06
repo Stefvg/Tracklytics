@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 @property (nonatomic, strong) NSMutableArray *valueArray;
 
--(void) init;
+-(void) initGauge;
 
 -(void) addValue:(NSInteger) value;
 

@@ -268,12 +268,12 @@ static BOOL shouldSaveOnDisk;
                     helper = [NSEntityDescription
                               insertNewObjectForEntityForName:@"TimerAggregateHelper"
                               inManagedObjectContext:context];
-                    [helper init];
+                    [helper initGauge];
                 }else {
                     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimerAggregateHelper" inManagedObjectContext:context];
                     NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
                     helper = (GaugeAggregateHelper *)unassociatedObject;
-                    [helper init];
+                    [helper initGauge];
                 }
                 helper.name = name;
                 helper.type = type;

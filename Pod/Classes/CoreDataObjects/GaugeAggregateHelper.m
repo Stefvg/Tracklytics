@@ -13,7 +13,7 @@
 
 // Insert code here to add functionality to your managed object subclass
 
--(void) init{
+-(void) initGauge{
     self.valueArray = [NSMutableArray new];
 }
 
