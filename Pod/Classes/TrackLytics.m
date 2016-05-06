@@ -13,10 +13,12 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "TimerAggregateHelper.h"
 #import "Reachability.h"
+#import "GaugeAggregateHelper.h"
 @implementation TrackLytics
 
 static NSMutableArray *array;
 static NSMutableDictionary *timerAggregates;
+static NSMutableDictionary *gaugeAggregates;
 
 static NSInteger appCode;
 static NSString *device;
@@ -31,6 +33,9 @@ static BOOL shouldSaveOnDisk;
 
 +(void) startTrackerWithAppCode:(NSInteger)code withSyncInterval:(double) interval {
     appCode = code;
+    timerAggregates = [NSMutableDictionary new];
+    gaugeAggregates = [NSMutableDictionary new];
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
     [self checkShouldSaveOnDisk];
     shouldMonitor = YES;
@@ -38,7 +43,6 @@ static BOOL shouldSaveOnDisk;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         
         array = [NSMutableArray new];
-        timerAggregates = [NSMutableDictionary new];
         
         [self checkShouldAggregateOnDevice];
         
@@ -253,26 +257,55 @@ static BOOL shouldSaveOnDisk;
         //dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSManagedObjectContext *context =
         [[StorageManager sharedInstance] getContext];
-        Gauge *gauge;
-        if(shouldSaveOnDisk){
-            gauge = [NSEntityDescription
-                     insertNewObjectForEntityForName:@"Gauge"
-                     inManagedObjectContext:context];
+        
+        if(aggregateOnDevice){
+            GaugeAggregateHelper *helper = [gaugeAggregates objectForKey:type];
+            if(helper != NULL && [helper.name isEqualToString:name]){
+                [helper addValue:value];
+                
+            }else {
+                if(shouldSaveOnDisk){
+                    helper = [NSEntityDescription
+                              insertNewObjectForEntityForName:@"TimerAggregateHelper"
+                              inManagedObjectContext:context];
+                    [helper init];
+                }else {
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimerAggregateHelper" inManagedObjectContext:context];
+                    NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+                    helper = (GaugeAggregateHelper *)unassociatedObject;
+                    [helper init];
+                }
+                helper.name = name;
+                helper.type = type;
+                helper.date = date;
+                [helper addValue:value];
+                [gaugeAggregates setObject:helper forKey:type];
+            }
+
+            
         }else {
-            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Gauge" inManagedObjectContext:context];
-            NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-            gauge = (Gauge *)unassociatedObject;
-            [gauge initialize];
+            Gauge *gauge;
+            if(shouldSaveOnDisk){
+                gauge = [NSEntityDescription
+                         insertNewObjectForEntityForName:@"Gauge"
+                         inManagedObjectContext:context];
+            }else {
+                NSEntityDescription *entity = [NSEntityDescription entityForName:@"Gauge" inManagedObjectContext:context];
+                NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+                gauge = (Gauge *)unassociatedObject;
+                [gauge initialize];
+            }
+            gauge.value = [NSNumber numberWithInteger:value];
         }
         gauge.name = name;
         gauge.type = type;
-        gauge.value = [NSNumber numberWithInteger:value];
         gauge.date = date;
         if(shouldSaveOnDisk){
             [self save];
         }
         [array addObject:gauge];
         //});
+        
     }
 }
 

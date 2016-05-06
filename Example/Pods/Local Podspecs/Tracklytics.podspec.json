@@ -1,16 +1,16 @@
 {
   "name": "Tracklytics",
-  "version": "0.1.0",
-  "summary": "A short description of Tracklytics.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/Tracklytics",
-  "license": "MIT",
+  "version": "0.4.5",
+  "summary": "A Monitoring library for iOS",
+  "description": "A Monitoring library for iOS applications.",
+  "homepage": "https://github.com/stefvg/Tracklytics",
+  "license": "KU Leuven",
   "authors": {
     "Stefvg": "stefvg1993@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/Tracklytics.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/stefvg/Tracklytics.git",
+    "tag": "0.4.5"
   },
   "platforms": {
     "ios": "7.0"
@@ -21,5 +21,10 @@
     "Tracklytics": [
       "Pod/Assets/*.png"
     ]
-  }
+  },
+  "resources": "Pod/Classes/CoreData/*.xcdatamodeld",
+  "frameworks": [
+    "CoreTelephony",
+    "CoreData"
+  ]
 }

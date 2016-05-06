@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "782DF983AEA832E865D70671"
+               BlueprintIdentifier = "10EA2E428B6986A61DB3C052"
                BuildableName = "Tracklytics.framework"
                BlueprintName = "Tracklytics"
                ReferencedContainer = "container:Pods.xcodeproj">

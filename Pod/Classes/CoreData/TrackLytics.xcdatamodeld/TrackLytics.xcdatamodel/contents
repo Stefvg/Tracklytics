@@ -14,6 +14,13 @@
     <entity name="Gauge" representedClassName="Gauge" parentEntity="Core" syncable="YES">
         <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
+    <entity name="GaugeAggregateHelper" parentEntity="Core" syncable="YES">
+        <attribute name="highest" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lowest" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="mean" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="median" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="numberOfMeasurements" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Histogram" representedClassName="Histogram" parentEntity="Core" syncable="YES">
         <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -31,6 +38,7 @@
         <element name="Core" positionX="0" positionY="0" width="128" height="135"/>
         <element name="CounterObject" positionX="0" positionY="0" width="128" height="58"/>
         <element name="Gauge" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="GaugeAggregateHelper" positionX="0" positionY="45" width="128" height="120"/>
         <element name="Histogram" positionX="0" positionY="0" width="128" height="60"/>
         <element name="Meter" positionX="0" positionY="0" width="128" height="60"/>
         <element name="Timer" positionX="0" positionY="0" width="128" height="60"/>

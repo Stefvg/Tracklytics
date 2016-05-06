@@ -13,6 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [TrackLytics startTrackerWithAppCode:15 withSyncInterval:15.0];
     return YES;
 }
 

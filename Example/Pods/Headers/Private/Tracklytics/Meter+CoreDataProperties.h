@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/CoreDataObjects/Meter+CoreDataProperties.h

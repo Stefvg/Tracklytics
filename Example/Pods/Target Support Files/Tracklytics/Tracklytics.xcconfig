@@ -1,0 +1,1 @@
+TRACKLYTICS_OTHER_LDFLAGS = -framework "CoreData" -framework "CoreTelephony"
