@@ -9,7 +9,7 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "GaugeAggregateHelpere+CoreDataProperties.h"
+#import "GaugeAggregateHelper+CoreDataProperties.h"
 
 @implementation GaugeAggregateHelper (CoreDataProperties)
 

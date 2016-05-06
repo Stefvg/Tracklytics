@@ -280,8 +280,12 @@ static BOOL shouldSaveOnDisk;
                 helper.date = date;
                 [helper addValue:value];
                 [gaugeAggregates setObject:helper forKey:type];
+                if(shouldSaveOnDisk){
+                    [self save];
+                }
+                [array addObject:helper];
             }
-
+            
             
         }else {
             Gauge *gauge;
@@ -296,14 +300,15 @@ static BOOL shouldSaveOnDisk;
                 [gauge initialize];
             }
             gauge.value = [NSNumber numberWithInteger:value];
+            
+            gauge.name = name;
+            gauge.type = type;
+            gauge.date = date;
+            if(shouldSaveOnDisk){
+                [self save];
+            }
+            [array addObject:gauge];
         }
-        gauge.name = name;
-        gauge.type = type;
-        gauge.date = date;
-        if(shouldSaveOnDisk){
-            [self save];
-        }
-        [array addObject:gauge];
         //});
         
     }
