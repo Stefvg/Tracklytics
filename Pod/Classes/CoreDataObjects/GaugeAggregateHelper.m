@@ -8,19 +8,21 @@
 
 #import "GaugeAggregateHelper.h"
 
-@implementation GaugeAggregateHelper
-@dynamic valueArray;
+@implementation GaugeAggregateHelper{
+    NSMutableArray *valueArray;
+}
 
 // Insert code here to add functionality to your managed object subclass
 
--(void) initGauge{
-    self.valueArray = [NSMutableArray new];
+-(void) initialize{
+    [super initialize];
+    valueArray = [NSMutableArray new];
 }
 
 -(void) addValue:(NSInteger) value {
-    [self.valueArray addObject:[NSNumber numberWithInteger:value]];
+    [valueArray addObject:[NSNumber numberWithInteger:value]];
     NSInteger numberOfMeasurements =  [self.numberOfMeasurements integerValue];
-    float mean =  [self.numberOfMeasurements floatValue];
+    float mean =  [self.mean floatValue];
     NSInteger lowest =  [self.lowest integerValue];
     NSInteger highest =  [self.highest integerValue];
     
@@ -34,14 +36,15 @@
     }
     
     self.mean = [NSNumber numberWithFloat:mean];
-    self.lowest = [NSNumber numberWithInteger:value];
+    self.lowest = [NSNumber numberWithInteger:lowest];
     self.highest = [NSNumber numberWithInteger:highest];
     self.median = [self getMedian];
     numberOfMeasurements++;
+    self.numberOfMeasurements = [NSNumber numberWithInteger:numberOfMeasurements];
 }
 
 -(NSNumber *) getMedian {
-    [self.valueArray sortUsingComparator:^(id obj1, id obj2) {
+    [valueArray sortUsingComparator:^(id obj1, id obj2) {
         if (obj1 > obj2)
             return NSOrderedAscending;
         else if (obj1 < obj2)
@@ -50,9 +53,9 @@
         return NSOrderedSame;
     }];
     
-    NSInteger middle = self.valueArray.count / 2;
-    if(self.valueArray.count>0){
-        return [self.valueArray objectAtIndex:middle];
+    NSInteger middle = valueArray.count / 2;
+    if(valueArray.count>0){
+        return [valueArray objectAtIndex:middle];
     }else {
         return 0;
     }

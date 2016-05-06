@@ -14,7 +14,7 @@
     <entity name="Gauge" representedClassName="Gauge" parentEntity="Core" syncable="YES">
         <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
-    <entity name="GaugeAggregateHelper" parentEntity="Core" syncable="YES">
+    <entity name="GaugeAggregateHelper" representedClassName="GaugeAggregateHelper" parentEntity="Core" syncable="YES">
         <attribute name="highest" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lowest" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="mean" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>

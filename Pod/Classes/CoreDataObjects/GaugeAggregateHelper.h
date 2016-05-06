@@ -14,9 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GaugeAggregateHelper : Core
 
 // Insert code here to declare functionality of your managed object subclass
-@property (nonatomic, strong) NSMutableArray *valueArray;
-
--(void) initGauge;
 
 -(void) addValue:(NSInteger) value;
 
