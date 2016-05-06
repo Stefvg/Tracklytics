@@ -67,6 +67,7 @@
 
 -(NSDictionary *) getData {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[super getMetadata]];
+    [dictionary setObject:self.numberOfMeasurements forKey:@"numberOfMeasurements"];
     [dictionary setObject:self.mean forKey:@"mean"];
     [dictionary setObject:self.median forKey:@"median"];
     [dictionary setObject:self.lowest forKey:@"lowest"];
