@@ -6,7 +6,7 @@
 //  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
-#import "Meter.h"
+#import "MeterAggregateHelper.h"
 #import "TrackLytics.h"
 @implementation MeterAggregateHelper
 

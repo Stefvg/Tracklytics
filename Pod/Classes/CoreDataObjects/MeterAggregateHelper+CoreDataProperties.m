@@ -13,6 +13,7 @@
 
 @implementation MeterAggregateHelper (CoreDataProperties)
 
-@dynamic value;
+@dynamic total;
+@dynamic numberOfMeasurements;
 
 @end
