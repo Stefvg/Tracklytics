@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 
 -(void) initialize;
--(void) addValue(float) value;
+-(void) addValue:(float) value;
 
 @end
 
