@@ -27,6 +27,10 @@
     <entity name="Meter" representedClassName="Meter" parentEntity="Core" syncable="YES">
         <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
+    <entity name="MeterAggregateHelper" representedClassName="MeterAggregateHelper" parentEntity="Core" syncable="YES">
+        <attribute name="numberOfMeasurements" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
     <entity name="Timer" representedClassName="Timer" parentEntity="Core" syncable="YES">
         <attribute name="durationTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
@@ -43,5 +47,6 @@
         <element name="Meter" positionX="0" positionY="0" width="128" height="60"/>
         <element name="Timer" positionX="0" positionY="0" width="128" height="60"/>
         <element name="TimerAggregateHelper" positionX="0" positionY="45" width="128" height="75"/>
+        <element name="MeterAggregateHelper" positionX="0" positionY="63" width="128" height="75"/>
     </elements>
 </model>
