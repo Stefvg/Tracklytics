@@ -451,7 +451,8 @@ static BOOL shouldSaveOnDisk;
 
 +(void) save {
     @try {
-        [[[StorageManager sharedInstance] getContext] save:nil];
+        if(shouldSaveOnDisk)
+            [[[StorageManager sharedInstance] getContext] save:nil];
     }
     @catch (NSException *exception) {
     }

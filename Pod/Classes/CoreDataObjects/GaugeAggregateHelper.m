@@ -43,7 +43,6 @@
     self.median = [self getMedian];
     numberOfMeasurements++;
     self.numberOfMeasurements = [NSNumber numberWithInteger:numberOfMeasurements];
-    [TrackLytics save];
     [TrackLytics addRequest:self];
 }
 

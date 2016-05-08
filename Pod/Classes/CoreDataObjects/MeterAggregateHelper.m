@@ -24,7 +24,6 @@
     numberOfMeasurements++;
     self.total = [NSNumber numberWithFloat:newValue];
     self.numberOfMeasurements = [NSNumber numberWithInteger:numberOfMeasurements];
-    [TrackLytics save];
     [TrackLytics addRequest:self];
 }
 
