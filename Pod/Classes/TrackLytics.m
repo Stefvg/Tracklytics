@@ -372,7 +372,7 @@ static BOOL shouldSaveOnDisk;
                 }else {
                     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MeterAggregateHelper" inManagedObjectContext:context];
                     NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-                    meter = (Meter *)unassociatedObject;
+                    meter = (MeterAggregateHelper *)unassociatedObject;
                 }
                 [meter initialize];
                 meter.name = @"";
