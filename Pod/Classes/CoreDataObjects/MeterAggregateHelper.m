@@ -11,6 +11,7 @@
 @implementation MeterAggregateHelper
 
 -(void) initialize {
+    [super initialize];
     self.total = [NSNumber numberWithFloat:0];
     self.numberOfMeasurements = [NSNumber numberWithInteger:0];
 }

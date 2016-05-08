@@ -14,7 +14,7 @@
 #import "TimerAggregateHelper.h"
 #import "Reachability.h"
 #import "GaugeAggregateHelper.h"
-
+#import "MeterAggregateHelper.h"
 @implementation TrackLytics
 
 static NSMutableArray *array;
@@ -359,10 +359,34 @@ static BOOL shouldSaveOnDisk;
     NSManagedObjectContext *context =
     [[StorageManager sharedInstance] getContext];
     if(shouldMonitor){
-        
-        
-            
-            
+        if(aggregateOnDevice){
+            MeterAggregateHelper *meter = [meterAggregates objectForKey: type];
+            if(meter != NULL){
+                [meter addValue:[value floatValue]];
+                
+            }else{
+                if(shouldSaveOnDisk){
+                    meter = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"MeterAggregateHelper"
+                             inManagedObjectContext:context];
+                }else {
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MeterAggregateHelper" inManagedObjectContext:context];
+                    NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+                    meter = (Meter *)unassociatedObject;
+                }
+                [meter initialize];
+                meter.name = @"";
+                meter.type = type;
+                meter.date = date;
+                [meter addValue:[value floatValue]];
+                [meterAggregates setObject:meter forKey:type];
+                
+            }
+            if(shouldSaveOnDisk){
+                [self save];
+            }
+            [array addObject:meter];
+        }else {
             Meter *meter;
             if(shouldSaveOnDisk){
                 meter = [NSEntityDescription
@@ -382,8 +406,13 @@ static BOOL shouldSaveOnDisk;
                 [self save];
             }
             [array addObject:meter];
-            
-            // });
+        }
+        
+        
+        
+        
+        
+        // });
         
     }
 }
