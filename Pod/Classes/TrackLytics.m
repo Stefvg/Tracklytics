@@ -384,7 +384,7 @@ static BOOL shouldSaveOnDisk;
             [array addObject:meter];
             
             // });
-        }
+        
     }
 }
 
