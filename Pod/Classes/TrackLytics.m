@@ -14,11 +14,13 @@
 #import "TimerAggregateHelper.h"
 #import "Reachability.h"
 #import "GaugeAggregateHelper.h"
+
 @implementation TrackLytics
 
 static NSMutableArray *array;
 static NSMutableDictionary *timerAggregates;
 static NSMutableDictionary *gaugeAggregates;
+static NSMutableDictionary *meterAggregates;
 
 static NSInteger appCode;
 static NSString *device;
@@ -35,6 +37,7 @@ static BOOL shouldSaveOnDisk;
     appCode = code;
     timerAggregates = [NSMutableDictionary new];
     gaugeAggregates = [NSMutableDictionary new];
+    meterAggregates = [NSMutableDictionary new];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendRequests) userInfo:nil repeats:YES];
     [self checkShouldSaveOnDisk];
@@ -351,32 +354,62 @@ static BOOL shouldSaveOnDisk;
 }
 
 +(void) addMeterEntryWithType:(NSString *)type withValue:(NSNumber *)value{
+    NSDate *date = [NSDate date];
+    //  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    NSManagedObjectContext *context =
+    [[StorageManager sharedInstance] getContext];
     if(shouldMonitor){
-        NSDate *date = [NSDate date];
-        //  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        NSManagedObjectContext *context =
-        [[StorageManager sharedInstance] getContext];
-        Meter *meter;
-        if(shouldSaveOnDisk){
-            meter = [NSEntityDescription
-                     insertNewObjectForEntityForName:@"Meter"
-                     inManagedObjectContext:context];
-        }else {
-            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Meter" inManagedObjectContext:context];
-            NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-            meter = (Meter *)unassociatedObject;
-            [meter initialize];
-        }
-        meter.name = @"";
-        meter.type = type;
-        meter.value = value;
-        meter.date = date;
-        if(shouldSaveOnDisk){
-            [self save];
-        }
-        [array addObject:meter];
         
-        // });
+        if(ShouldAggregateOnDevice){
+            MeterAggregateHelper *meter = [meterAggregates objectForKey: type];
+            if(meter != NULL){
+                [meter addValue:[value floatValue]];
+                
+            }else
+                if(shouldSaveOnDisk){
+                    meter = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"MeterAggregateHelper"
+                             inManagedObjectContext:context];
+                }else {
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MeterAggregateHelper" inManagedObjectContext:context];
+                    NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+                    meter = (Meter *)unassociatedObject;
+                }
+            [meter initialize];
+            meter.name = @"";
+            meter.type = type;
+            meter.date = date;
+            [meter addValue:[value floatValue]];
+            [meterAggregates setObject:meter forKey:type];
+            if(shouldSaveOnDisk){
+                [self save];
+            }
+            [array addObject:meter];
+        }else {
+            
+            
+            Meter *meter;
+            if(shouldSaveOnDisk){
+                meter = [NSEntityDescription
+                         insertNewObjectForEntityForName:@"Meter"
+                         inManagedObjectContext:context];
+            }else {
+                NSEntityDescription *entity = [NSEntityDescription entityForName:@"Meter" inManagedObjectContext:context];
+                NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+                meter = (Meter *)unassociatedObject;
+                [meter initialize];
+            }
+            meter.name = @"";
+            meter.type = type;
+            meter.value = value;
+            meter.date = date;
+            if(shouldSaveOnDisk){
+                [self save];
+            }
+            [array addObject:meter];
+            
+            // });
+        }
     }
 }
 
