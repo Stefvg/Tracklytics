@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Tracklytics"
-  s.version          = "0.5.0.3"
+  s.version          = "0.5.0.4"
   s.summary          = "A Monitoring library for iOS"
 
 # This description is used to generate tags and improve search results.

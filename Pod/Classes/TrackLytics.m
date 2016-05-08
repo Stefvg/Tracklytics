@@ -360,32 +360,7 @@ static BOOL shouldSaveOnDisk;
     [[StorageManager sharedInstance] getContext];
     if(shouldMonitor){
         
-        if(ShouldAggregateOnDevice){
-            MeterAggregateHelper *meter = [meterAggregates objectForKey: type];
-            if(meter != NULL){
-                [meter addValue:[value floatValue]];
-                
-            }else
-                if(shouldSaveOnDisk){
-                    meter = [NSEntityDescription
-                             insertNewObjectForEntityForName:@"MeterAggregateHelper"
-                             inManagedObjectContext:context];
-                }else {
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MeterAggregateHelper" inManagedObjectContext:context];
-                    NSManagedObject *unassociatedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-                    meter = (Meter *)unassociatedObject;
-                }
-            [meter initialize];
-            meter.name = @"";
-            meter.type = type;
-            meter.date = date;
-            [meter addValue:[value floatValue]];
-            [meterAggregates setObject:meter forKey:type];
-            if(shouldSaveOnDisk){
-                [self save];
-            }
-            [array addObject:meter];
-        }else {
+        
             
             
             Meter *meter;
