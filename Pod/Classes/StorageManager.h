@@ -1,6 +1,6 @@
 //
 //  StorageManager.h
-//  SportsTimer
+//  Tracklytics
 //
 //  Created by Stef Van Gils on 25/10/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
@@ -14,9 +14,18 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
+/**
+ * Used by the Tracklytics library to store data on disk
+ */
 + (id)sharedInstance;
+/**
+ * Used by the Tracklytics library to store data on disk
+ */
 -(NSManagedObjectContext *) getContext;
 
+/**
+ * Used by the Tracklytics library to store data on disk
+ */
 -(void) save;
 
 @end

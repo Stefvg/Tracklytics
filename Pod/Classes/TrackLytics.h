@@ -1,6 +1,6 @@
 //
 //  Logger.h
-//  SportsTimer
+//  Tracklytics
 //
 //  Created by Stef Van Gils on 29/09/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
@@ -114,5 +114,8 @@
  */
 +(NSDictionary *) getMetaData;
 
+/**
+ * This method should not be used in the app.
+ */
 +(void) save;
 @end

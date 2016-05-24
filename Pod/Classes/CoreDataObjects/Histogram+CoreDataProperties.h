@@ -1,6 +1,6 @@
 //
 //  Histogram+CoreDataProperties.h
-//  SportsTimer
+//  Tracklytics
 //
 //  Created by Stef Van Gils on 23/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.

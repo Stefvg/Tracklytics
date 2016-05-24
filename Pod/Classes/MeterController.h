@@ -1,6 +1,6 @@
 //
 //  Meter.h
-//  SportsTimer
+//  Tracklytics
 //
 //  Created by Stef Van Gils on 28/11/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.
@@ -28,6 +28,9 @@
  */
 -(void) addRepeatable:(id<MeterInterface>) interface withTimeInterval:(NSTimeInterval) interval;
 
+/**
+ * Stop the automatic collection of values from the MeterInterface.
+ */
 -(void) stop;
 
 @end

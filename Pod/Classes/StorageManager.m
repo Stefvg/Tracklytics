@@ -1,6 +1,6 @@
 //
 //  StorageManager.m
-//  SportsTimer
+//  Tracklytics
 //
 //  Created by Stef Van Gils on 25/10/15.
 //  Copyright © 2015 KU Leuven. All rights reserved.

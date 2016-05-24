@@ -1,9 +1,9 @@
 //
 //  HTTPPost.m
-//  voedingscentrum
+//  Tracklytics
 //
-//  Created by Eelco van de Wiel on 27-05-13.
-//  Copyright (c) 2013 intoapps. All rights reserved.
+//  Created by Stef Van Gils on 28/11/15.
+//  Copyright © 2015 KU Leuven. All rights reserved.
 //
 
 #import "HTTPPost.h"

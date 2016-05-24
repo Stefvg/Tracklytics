@@ -56,6 +56,10 @@
 		DC818AEE81FC98F1BFD24E5DB89C39F8 /* Gauge+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = A104468487927E3C88D07D520B9065BC /* Gauge+CoreDataProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDDBDEBE9D5F5F70965C1E4445D878D7 /* TrackLytics.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 5AE41AA2F6E8F846966A19F8ED8C1DEF /* TrackLytics.xcdatamodeld */; };
 		DF28D28E12706953B3DF197E50132AE8 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 235F566525BFE3015941BE4F004B60F1 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1235F5D1CF459FA006B3550 /* MeterAggregateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E1235F591CF459FA006B3550 /* MeterAggregateHelper.h */; };
+		E1235F5E1CF459FA006B3550 /* MeterAggregateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235F5A1CF459FA006B3550 /* MeterAggregateHelper.m */; };
+		E1235F5F1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E1235F5B1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.h */; };
+		E1235F601CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1235F5C1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.m */; };
 		E1445BB4825F1EA82CE6C2785FBB7AEB /* TimerAggregateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B333C1AF51274110836E15D839E927E /* TimerAggregateHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E16C82ACA88F64C6DCA222A97BF0A736 /* MeterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65B7D6A59C78644D46FB339EE7C548 /* MeterController.m */; };
 		E488D0C7C346B175B6457BA49B22974E /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = CC697171F03DDE8230D44BF283E767F8 /* Timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -175,6 +179,10 @@
 		DC8BCD951EE9ADD10F5EDA4E9EF7A717 /* Pods-Tracklytics_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tracklytics_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		DED24C2AC2DD6F2F7DA7F700C5D2EE4F /* Histogram.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = Histogram.m; sourceTree = "<group>"; };
 		DFA49F922259AAB7E5DA91CD24723895 /* Tracklytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tracklytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1235F591CF459FA006B3550 /* MeterAggregateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterAggregateHelper.h; sourceTree = "<group>"; };
+		E1235F5A1CF459FA006B3550 /* MeterAggregateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeterAggregateHelper.m; sourceTree = "<group>"; };
+		E1235F5B1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MeterAggregateHelper+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1235F5C1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MeterAggregateHelper+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E2945E3876743B1726A243346A493C0F /* Pods-Tracklytics_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tracklytics_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E46CCCB9D4CD0B6CE25B7BFEE4E7C065 /* GaugeAggregateHelper+CoreDataProperties.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GaugeAggregateHelper+CoreDataProperties.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -385,6 +393,10 @@
 				06664188746C3F04B33FBF1D0089A787 /* Meter.m */,
 				6F2C73F75FE581981A829E0B48CE6C98 /* Meter+CoreDataProperties.h */,
 				2083A8BA52884CAD764CCFCBEE654C59 /* Meter+CoreDataProperties.m */,
+				E1235F591CF459FA006B3550 /* MeterAggregateHelper.h */,
+				E1235F5A1CF459FA006B3550 /* MeterAggregateHelper.m */,
+				E1235F5B1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.h */,
+				E1235F5C1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.m */,
 				CC697171F03DDE8230D44BF283E767F8 /* Timer.h */,
 				B9BC0E55BB2DF546DE4E9FC47A9FF27A /* Timer.m */,
 				BC7F80F8B5BD7845D7B3D06E5A5E18DC /* Timer+CoreDataProperties.h */,
@@ -507,6 +519,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1235F5D1CF459FA006B3550 /* MeterAggregateHelper.h in Headers */,
+				E1235F5F1CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.h in Headers */,
 				627DAFFF5A86224F51F101F257CF77AD /* Pods-Tracklytics_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,6 +662,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				332C2FFAA868C2A78B855D8BC2EF557A /* Pods-Tracklytics_Example-dummy.m in Sources */,
+				E1235F601CF459FA006B3550 /* MeterAggregateHelper+CoreDataProperties.m in Sources */,
+				E1235F5E1CF459FA006B3550 /* MeterAggregateHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
