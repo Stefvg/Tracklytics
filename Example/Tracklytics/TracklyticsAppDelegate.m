@@ -7,7 +7,7 @@
 //
 
 #import "TracklyticsAppDelegate.h"
-
+#import "TrackLytics.h"
 @implementation TracklyticsAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

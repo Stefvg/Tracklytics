@@ -1,6 +1,6 @@
 {
   "name": "Tracklytics",
-  "version": "0.4.5",
+  "version": "0.5.4",
   "summary": "A Monitoring library for iOS",
   "description": "A Monitoring library for iOS applications.",
   "homepage": "https://github.com/stefvg/Tracklytics",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/stefvg/Tracklytics.git",
-    "tag": "0.4.5"
+    "tag": "0.5.4"
   },
   "platforms": {
     "ios": "7.0"

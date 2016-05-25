@@ -1,5 +1,5 @@
 PODS:
-  - Tracklytics (0.4.5)
+  - Tracklytics (0.5.4)
 
 DEPENDENCIES:
   - Tracklytics (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Tracklytics: 542b75ddfff76d4295417a2e79e792d52b55f493
+  Tracklytics: 70c3b3287459d167a6e73cdac059c5306b756633
 
 COCOAPODS: 0.38.2

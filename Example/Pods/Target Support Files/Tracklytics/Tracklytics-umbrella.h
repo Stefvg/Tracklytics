@@ -12,6 +12,8 @@
 #import "Histogram.h"
 #import "Meter+CoreDataProperties.h"
 #import "Meter.h"
+#import "MeterAggregateHelper+CoreDataProperties.h"
+#import "MeterAggregateHelper.h"
 #import "Timer+CoreDataProperties.h"
 #import "Timer.h"
 #import "TimerAggregateHelper+CoreDataProperties.h"

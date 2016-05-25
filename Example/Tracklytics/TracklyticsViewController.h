@@ -8,6 +8,7 @@
 
 @import UIKit;
 
-@interface TracklyticsViewController : UIViewController
+#import "MeterInterface.h"
+@interface TracklyticsViewController : UIViewController <MeterInterface>
 
 @end
